@@ -4,9 +4,12 @@
 #include <QList>
 #include <QString>
 
+#include <boost/program_options.hpp>
+
 #include <iostream>
 
 #include "mainwindow.h"
+#include "programoptions.h"
 #include "model/course.h"
 #include "model/studycourse.h"
 #include "model/institution.h"
@@ -14,6 +17,9 @@
 using std::cout;
 using std::cerr;
 using std::endl;
+using std::string;
+
+namespace po = boost::program_options;
 
 void test();
 
@@ -24,7 +30,9 @@ int main(int argc, char *argv[])
 //    w.show();
     
 //    return a.exec();
-    test();
+    ProgramOptions po(argc, argv);
+    po::variables_map m = po.getVariables();
+    //test();
 }
 
 void test()

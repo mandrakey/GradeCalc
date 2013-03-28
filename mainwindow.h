@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QList>
+
+#include "model/institution.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +20,9 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    QList<Institution> mInstitutions;
+
+    void loadData();
 };
 
 #endif // MAINWINDOW_H

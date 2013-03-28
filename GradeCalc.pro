@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GradeCalc
 TEMPLATE = app
 
+LIBS += -L/usr/local/lib
+LIBS += -lboost_program_options
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -18,14 +20,18 @@ SOURCES += main.cpp\
     model/institution.cpp \
     model/course.cpp \
     exceptions/illegalxmlexception.cpp \
-    exceptions/exception.cpp
+    exceptions/exception.cpp \
+    programoptions.cpp \
+    exceptions/uninitializedexception.cc
 
 HEADERS  += mainwindow.h \
     model/studycourse.h \
     model/institution.h \
     model/course.h \
     exceptions/illegalxmlexception.h \
-    exceptions/exception.h
+    exceptions/exception.h \
+    programoptions.h \
+    exceptions/uninitializedexception.h
 
 FORMS    += mainwindow.ui
 
