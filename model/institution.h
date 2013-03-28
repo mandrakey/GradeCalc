@@ -18,12 +18,14 @@ class Institution
 {
 public:
     Institution();
-    Institution(QDomNode *node) throw (IllegalXmlException);
+    Institution(const QDomNode &node) throw (IllegalXmlException);
 
     // Getter / Setter
     const QString& getName() const;
     const QString& getDescription() const;
     const QString& getCity() const;
+
+    QString toString() const;
 
 private:
     QString mName;

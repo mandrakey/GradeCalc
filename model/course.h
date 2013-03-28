@@ -2,11 +2,16 @@
 #define COURSE_H
 
 #include <QString>
+#include <QtXml/QDomNode>
+#include <QtXml/QDomElement>
+
+#include "exceptions/illegalxmlexception.h"
 
 class Course
 {
 public:
     Course();
+    Course(const QDomNode &node) throw (IllegalXmlException);
     explicit Course(int semester, const QString &name, const QString &shortname,
                     double ects);
 
@@ -19,6 +24,8 @@ public:
     double getValue() const;
 
     void setGrade(double grade) throw (QString);
+
+    QString toString() const;
 
     // Methods
     /**

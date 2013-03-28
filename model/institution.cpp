@@ -1,32 +1,31 @@
 #include "institution.h"
-
+#include <iostream>
 Institution::Institution() :
     mName(QString()), mDescription(QString()), mCity(QString()),
     mStudyCourses(QList<StudyCourse>())
 {
 }
 
-Institution::Institution(QDomNode *node) throw (IllegalXmlException) :
+Institution::Institution(const QDomNode &node) throw (IllegalXmlException) :
     Institution()
 {
-    if (!node)
-        throw IllegalXmlException("Given node is null");
-
-    QDomElement element = node->toElement();
+    QDomElement element = node.toElement();
     QDomNodeList children = element.childNodes();
 
-    foreach (QDomNode child, children) {
-        QDomElement e = child.toElement();
+    for (int i = 0; i < children.size(); ++i) {
+        QDomElement e = children.at(i).toElement();
 
-        if (e.tagName().compare("name") != 0)
+        if (e.tagName().compare("name") == 0)
             this->mName = e.text();
-        else if (e.tagName().compare("city") != 0)
+        else if (e.tagName().compare("city") == 0)
             this->mCity = e.text();
-        else if (e.tagName().compare("description") != 0)
+        else if (e.tagName().compare("description") == 0)
             this->mDescription = e.text();
-        else if (e.tagName().compare("StudyCourse") != 0)
-            this->mStudyCourses.push_back(StudyCourse(child));
+        else if (e.tagName().compare("StudyCourse") == 0)
+            this->mStudyCourses.push_back(StudyCourse(children.at(i)));
     }
+    std::cout << QString("Institution[%1, %2, %3]").arg(mName, mCity, mDescription).
+                 toStdString() << std::endl;
 }
 
 const QString& Institution::getName() const
@@ -42,4 +41,17 @@ const QString& Institution::getDescription() const
 const QString& Institution::getCity() const
 {
     return mCity;
+}
+
+QString Institution::toString() const
+{
+    QString res = QString("> Institution %1 in %2 (%3):\n").
+            arg(mName, mCity, mDescription);
+
+    foreach (StudyCourse s, mStudyCourses) {
+        res.append(s.toString());
+    }
+
+    res.append("< Institution.\n");
+    return res;
 }

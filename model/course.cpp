@@ -13,6 +13,24 @@ Course::Course(int semester, const QString &name, const QString &shortname,
 {
 }
 
+Course::Course(const QDomNode &node) throw (IllegalXmlException) :
+    Course()
+{
+    QDomElement element = node.toElement();
+
+    if (!element.hasAttribute("shortname"))
+        throw IllegalXmlException("Course needs a shortname");
+    if (!element.hasAttribute("ects"))
+        throw IllegalXmlException("Course needs ects points");
+    if (!element.hasAttribute("semester"))
+        throw IllegalXmlException("Course needs a semester");
+
+    this->mShortname = element.attribute("shortname");
+    this->mEcts = element.attribute("ects").toDouble();
+    this->mSemester = element.attribute("semester").toInt();
+    this->mName = element.text();
+}
+
 int Course::getSemester() const
 {
     return mSemester;
@@ -58,4 +76,17 @@ void Course::setGrade(double grade) throw (QString)
                       "set");
     mGrade = grade;
     mValue = mGrade * mEcts;
+}
+
+QString Course::toString() const
+{
+    QString res = QString("\t\t> Course %1 (%2)\n").
+            arg(mName.trimmed(), mShortname);
+    res.append(QString("\t\t\tSemester: %1\n").arg(mSemester));
+    res.append(QString("\t\t\tECTS: %1\n").arg(mEcts));
+    res.append(QString("\t\t\tGrade: %1\n").arg(mGrade));
+    res.append(QString("\t\t\tValue: %1\n").arg(mValue));
+    res.append("\t\t< Course.\n");
+
+    return res;
 }

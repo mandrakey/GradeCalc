@@ -1,5 +1,5 @@
 #include "studycourse.h"
-
+#include <iostream>
 StudyCourse::StudyCourse() :
     mName(QString()), mTitle(QString()), mCourses(QList<Course>())
 {
@@ -10,19 +10,24 @@ StudyCourse::StudyCourse(const QString &name) :
 {
 }
 
-StudyCourse::StudyCourse(QDomNode *node) throw (IllegalXmlException) :
+StudyCourse::StudyCourse(const QDomNode &node) throw (IllegalXmlException) :
     StudyCourse()
 {
-    if (!node)
-        throw IllegalXmlException("Given node is null pointer");
+    QDomElement element = node.toElement();
 
-    QDomElement element = node->toElement();
     if (!element.hasAttribute("name"))
         throw IllegalXmlException("StudyCourse needs a name");
     if (!element.hasAttribute("title"))
         throw IllegalXmlException("StudyCourse needs a resulting title");
-    this->mName = element.attribute("name");
 
+    this->mName = element.attribute("name");
+    this->mTitle = element.attribute("title");
+
+    QDomNodeList courses = element.elementsByTagName("Course");
+    for (int i = 0; i < courses.size(); ++i)
+        this->mCourses.push_back(Course(courses.at(i)));
+
+    std::cout << QString("StudyCourse[%1, %2]").arg(mName, mTitle).toStdString() << std::endl;
 }
 
 const QString& StudyCourse::getName() const
@@ -59,4 +64,17 @@ const Course& StudyCourse::getCourse(int index) const throw (QString)
 void StudyCourse::addCourse(const Course &c)
 {
     mCourses.push_back(c);
+}
+
+QString StudyCourse::toString() const
+{
+    QString res = QString("\tStudyCourse %1 (%2):\n").
+            arg(mName, mTitle);
+
+    foreach (Course c, mCourses) {
+        res.append(c.toString());
+    }
+
+    res.append("\t< StudyCourse.\n");
+    return res;
 }

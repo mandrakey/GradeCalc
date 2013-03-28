@@ -1,0 +1,21 @@
+<GradeCalc>
+
+    <Institution>
+        <name>Fachhochschule Kaiserslautern, Standort Zweibrücken</name>
+        <city>Zweibrücken</city>
+        <description>Description :)</description>
+
+        <StudyCourse name="Medieninformatik PO2006" title="B.Sc.">
+            <Course shortname="GDI" ects="10" semester="1">
+                Grundlagen der Informatik
+            </Course>
+            <Course shortname="MAT" ects="7.5" semester="1">
+                Mathematische Grundlagen
+            </Course>
+            <Course shortname="MMP" ects="12" semester="5">
+                Multimediaprojekt
+            </Course>
+        </StudyCourse>
+    </Institution>
+
+</GradeCalc>

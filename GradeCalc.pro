@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,9 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    institution.cpp \
-    course.cpp \
-    studycourse.cpp \
     model/studycourse.cpp \
     model/institution.cpp \
     model/course.cpp \
@@ -24,9 +21,6 @@ SOURCES += main.cpp\
     exceptions/exception.cpp
 
 HEADERS  += mainwindow.h \
-    institution.h \
-    course.h \
-    studycourse.h \
     model/studycourse.h \
     model/institution.h \
     model/course.h \
@@ -34,3 +28,6 @@ HEADERS  += mainwindow.h \
     exceptions/exception.h
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    data.xml

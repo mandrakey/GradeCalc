@@ -13,7 +13,7 @@ class StudyCourse
 {
 public:
     StudyCourse();
-    StudyCourse(QDomNode *node) throw (IllegalXmlException);
+    StudyCourse(const QDomNode &node) throw (IllegalXmlException);
     explicit StudyCourse(const QString& name);
 
     // Getter / Setter
@@ -33,6 +33,8 @@ public:
      * @return Reference to the requested course
      */
     const Course& getCourse(int index) const throw (QString);
+
+    QString toString() const;
 
     void addCourse(const Course& c);
 

@@ -2,9 +2,8 @@
 #define EXCEPTION_H
 
 #include <QString>
-#include <QException>
 
-class Exception : public QException
+class Exception
 {
 public:
     Exception();
