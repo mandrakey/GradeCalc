@@ -9,6 +9,8 @@ public:
     Exception();
     Exception(const QString &message);
 
+    virtual const QString& getMessage() const;
+
 protected:
     const QString mMessage;
 };

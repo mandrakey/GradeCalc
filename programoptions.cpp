@@ -23,10 +23,8 @@ void ProgramOptions::init()
     mInitialized = true;
 }
 
-ProgramOptions::ProgramOptions() throw (UninitializedException)
+ProgramOptions::ProgramOptions()
 {
-    if (!mInitialized)
-        throw UninitializedException("ProgramOptions must be initialized first");
 }
 
 ProgramOptions::ProgramOptions(int argc, char *argv[])
@@ -38,8 +36,10 @@ ProgramOptions::ProgramOptions(int argc, char *argv[])
     reload(argc, argv);
 }
 
-po::variables_map& ProgramOptions::getVariables() const
+po::variables_map& ProgramOptions::getVariables() const throw (UninitializedException)
 {
+    if (!mInitialized)
+        throw UninitializedException();
     return mVariables;
 }
 

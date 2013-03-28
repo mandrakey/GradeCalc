@@ -3,8 +3,15 @@
 
 #include <QMainWindow>
 #include <QList>
+#include <QDebug>
+#include <QMessageBox>
+#include <QFile>
 
+#include "programoptions.h"
 #include "model/institution.h"
+#include "exceptions/uninitializedexception.h"
+
+namespace po = boost::program_options;
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +27,8 @@ public:
     
 private:
     Ui::MainWindow *ui;
-    QList<Institution> mInstitutions;
+    QList<Institution*> mInstitutions;
+    Institution *mCurrentInstitution;
 
     void loadData();
 };

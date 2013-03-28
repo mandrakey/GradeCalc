@@ -13,12 +13,12 @@ using std::string;
 class ProgramOptions
 {
 public:
-    explicit ProgramOptions() throw (UninitializedException);
+    explicit ProgramOptions();
     ProgramOptions(int argc, char *argv[]);
 
     void reload(int argc, char *argv[]);
 
-    po::variables_map& getVariables() const;
+    po::variables_map& getVariables() const throw (UninitializedException);
 
     static const string DATAFILE_DEFAULT;
     static const string GRADESFILE_DEFAULT;
