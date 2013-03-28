@@ -19,12 +19,13 @@ class Institution
 public:
     Institution();
     Institution(const QDomNode &node) throw (IllegalXmlException);
+    ~Institution();
 
     // Getter / Setter
     const QString& getName() const;
     const QString& getDescription() const;
     const QString& getCity() const;
-    const QList<StudyCourse>& getStudyCourses() const;
+    const QList<StudyCourse*>& getStudyCourses() const;
 
     QString toString() const;
 
@@ -32,7 +33,7 @@ private:
     QString mName;
     QString mDescription;
     QString mCity;
-    QList<StudyCourse> mStudyCourses;
+    QList<StudyCourse*> mStudyCourses;
 };
 
 #endif // INSTITUTION_H

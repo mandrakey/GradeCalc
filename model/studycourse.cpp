@@ -1,12 +1,7 @@
 #include "studycourse.h"
 #include <iostream>
 StudyCourse::StudyCourse() :
-    mName(QString()), mTitle(QString()), mCourses(QList<Course>())
-{
-}
-
-StudyCourse::StudyCourse(const QString &name) :
-    mName(name), mCourses(QList<Course>())
+    mName(QString()), mTitle(QString()), mCourses(QList<Course*>())
 {
 }
 
@@ -25,7 +20,7 @@ StudyCourse::StudyCourse(const QDomNode &node) throw (IllegalXmlException) :
 
     QDomNodeList courses = element.elementsByTagName("Course");
     for (int i = 0; i < courses.size(); ++i)
-        this->mCourses.push_back(Course(courses.at(i)));
+        this->mCourses.push_back(new Course(courses.at(i)));
 
     std::cout << QString("StudyCourse[%1, %2]").arg(mName, mTitle).toStdString() << std::endl;
 }
@@ -43,9 +38,9 @@ const QList<Course>& StudyCourse::getCourses() const
 const Course& StudyCourse::getCourse(const QString &name) const throw (QString)
 {
     int index = 0;
-    foreach (Course c, mCourses) {
-        if (c.getShortname().compare(name) == 0 ||
-                c.getName().compare(name) == 0)
+    foreach (Course* c, mCourses) {
+        if (c->getShortname().compare(name) == 0 ||
+                c->getName().compare(name) == 0)
             return mCourses.at(index);
         ++index;
     }
@@ -61,7 +56,7 @@ const Course& StudyCourse::getCourse(int index) const throw (QString)
     return mCourses.at(index);
 }
 
-void StudyCourse::addCourse(const Course &c)
+void StudyCourse::addCourse(const Course *c)
 {
     mCourses.push_back(c);
 }
@@ -71,8 +66,8 @@ QString StudyCourse::toString() const
     QString res = QString("\tStudyCourse %1 (%2):\n").
             arg(mName, mTitle);
 
-    foreach (Course c, mCourses) {
-        res.append(c.toString());
+    foreach (Course* c, mCourses) {
+        res.append(c->toString());
     }
 
     res.append("\t< StudyCourse.\n");

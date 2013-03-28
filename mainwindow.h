@@ -29,8 +29,10 @@ private:
     Ui::MainWindow *ui;
     QList<Institution*> mInstitutions;
     Institution *mCurrentInstitution;
+    StudyCourse *mCurrentStudyCourse;
 
     void loadData();
+    void showCourses(QString& studyCourse);
 };
 
 #endif // MAINWINDOW_H

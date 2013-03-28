@@ -5,7 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     mInstitutions(QList<Institution*>()),
-    mCurrentInstitution(0)
+    mCurrentInstitution(0),
+    mCurrentStudyCourse(0)
 {
     ui->setupUi(this);
     loadData();
@@ -69,6 +70,16 @@ void MainWindow::loadData()
     }
 
     // Load study courses for current institution
-    foreach (StudyCourse s, mCurrentInstitution->getStudyCourses())
-        this->ui->mStudyCourseCombo->addItem(s.getName());
+    QList<StudyCourse*> sc = mCurrentInstitution->getStudyCourses();
+    for (int i = 0; i < sc.size(); ++i) {
+        this->ui->mStudyCourseCombo->addItem(sc.at(i)->getName());
+
+        if (i == 0)
+            mCurrentStudyCourse = sc.at(i);
+    }
+}
+
+void MainWindow::showCourses(QString &studyCourse)
+{
+
 }

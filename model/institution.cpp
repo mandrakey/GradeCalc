@@ -22,10 +22,16 @@ Institution::Institution(const QDomNode &node) throw (IllegalXmlException) :
         else if (e.tagName().compare("description") == 0)
             this->mDescription = e.text();
         else if (e.tagName().compare("StudyCourse") == 0)
-            this->mStudyCourses.push_back(StudyCourse(children.at(i)));
+            this->mStudyCourses.push_back(new StudyCourse(children.at(i)));
     }
     std::cout << QString("Institution[%1, %2, %3]").arg(mName, mCity, mDescription).
                  toStdString() << std::endl;
+}
+
+Institution::~Institution()
+{
+    foreach (StudyCourse *s, mStudyCourses)
+        delete s;
 }
 
 const QString& Institution::getName() const
@@ -53,8 +59,8 @@ QString Institution::toString() const
     QString res = QString("> Institution %1 in %2 (%3):\n").
             arg(mName, mCity, mDescription);
 
-    foreach (StudyCourse s, mStudyCourses) {
-        res.append(s.toString());
+    foreach (StudyCourse *s, mStudyCourses) {
+        res.append(s->toString());
     }
 
     res.append("< Institution.\n");
