@@ -69,4 +69,6 @@ void MainWindow::loadData()
     }
 
     // Load study courses for current institution
+    foreach (StudyCourse s, mCurrentInstitution->getStudyCourses())
+        this->ui->mStudyCourseCombo->addItem(s.getName());
 }

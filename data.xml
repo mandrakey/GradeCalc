@@ -16,6 +16,18 @@
                 Multimediaprojekt
             </Course>
         </StudyCourse>
+        
+        <StudyCourse name="Angewandte Informatik PO2006" title="B.Sc.">
+            <Course shortname="GDI" ects="10" semester="1">
+                Grundlagen der Informatik
+            </Course>
+            <Course shortname="MAT" ects="7.5" semester="1">
+                Mathematische Grundlagen
+            </Course>
+            <Course shortname="INPR" ects="12" semester="5">
+                Informatikprojekt
+            </Course>
+        </StudyCourse>
     </Institution>
 
 </GradeCalc>

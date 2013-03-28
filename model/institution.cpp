@@ -43,6 +43,11 @@ const QString& Institution::getCity() const
     return mCity;
 }
 
+const QList<StudyCourse>& Institution::getStudyCourses() const
+{
+    return mStudyCourses;
+}
+
 QString Institution::toString() const
 {
     QString res = QString("> Institution %1 in %2 (%3):\n").
