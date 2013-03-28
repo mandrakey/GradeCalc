@@ -1,14 +1,19 @@
 #ifndef STUDYCOURSE_H
 #define STUDYCOURSE_H
 
-#include "course.h"
-
+#include <QtXml/QDomNode>
+#include <QtXml/QDomElement>
+#include <QtXml/QDomNodeList>
 #include <QList>
+
+#include "course.h"
+#include "exceptions/illegalxmlexception.h"
 
 class StudyCourse
 {
 public:
     StudyCourse();
+    StudyCourse(QDomNode *node) throw (IllegalXmlException);
     explicit StudyCourse(const QString& name);
 
     // Getter / Setter
@@ -33,6 +38,7 @@ public:
 
 private:
     QString mName;
+    QString mTitle;
     QList<Course> mCourses;
 };
 

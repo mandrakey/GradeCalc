@@ -1,13 +1,28 @@
 #include "studycourse.h"
 
 StudyCourse::StudyCourse() :
-    mName(QString("")), mCourses(QList<Course>())
+    mName(QString()), mTitle(QString()), mCourses(QList<Course>())
 {
 }
 
 StudyCourse::StudyCourse(const QString &name) :
     mName(name), mCourses(QList<Course>())
 {
+}
+
+StudyCourse::StudyCourse(QDomNode *node) throw (IllegalXmlException) :
+    StudyCourse()
+{
+    if (!node)
+        throw IllegalXmlException("Given node is null pointer");
+
+    QDomElement element = node->toElement();
+    if (!element.hasAttribute("name"))
+        throw IllegalXmlException("StudyCourse needs a name");
+    if (!element.hasAttribute("title"))
+        throw IllegalXmlException("StudyCourse needs a resulting title");
+    this->mName = element.attribute("name");
+
 }
 
 const QString& StudyCourse::getName() const

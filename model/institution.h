@@ -2,6 +2,13 @@
 #define INSTITUTION_H
 
 #include <QString>
+#include <QList>
+#include <QtXml/QDomNode>
+#include <QtXml/QDomElement>
+#include <QtXml/QDomNodeList>
+
+#include "exceptions/illegalxmlexception.h"
+#include "studycourse.h"
 
 /**
  * Holds information about a stuy/course institution.
@@ -11,13 +18,7 @@ class Institution
 {
 public:
     Institution();
-
-    /**
-     * Construct institution from a given XML file.
-     * @param filename XML file to load
-     * @throws QString
-     */
-    explicit Institution(const char* filename) throw (QString);
+    Institution(QDomNode *node) throw (IllegalXmlException);
 
     // Getter / Setter
     const QString& getName() const;
@@ -28,6 +29,7 @@ private:
     QString mName;
     QString mDescription;
     QString mCity;
+    QList<StudyCourse> mStudyCourses;
 };
 
 #endif // INSTITUTION_H

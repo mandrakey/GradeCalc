@@ -16,11 +16,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     institution.cpp \
     course.cpp \
-    studycourse.cpp
+    studycourse.cpp \
+    model/studycourse.cpp \
+    model/institution.cpp \
+    model/course.cpp \
+    exceptions/illegalxmlexception.cpp \
+    exceptions/exception.cpp
 
 HEADERS  += mainwindow.h \
     institution.h \
     course.h \
-    studycourse.h
+    studycourse.h \
+    model/studycourse.h \
+    model/institution.h \
+    model/course.h \
+    exceptions/illegalxmlexception.h \
+    exceptions/exception.h
 
 FORMS    += mainwindow.ui
