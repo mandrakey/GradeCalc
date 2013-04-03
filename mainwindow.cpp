@@ -77,9 +77,10 @@ void MainWindow::loadData()
         if (i == 0)
             mCurrentStudyCourse = sc.at(i);
     }
-}
 
-void MainWindow::showCourses(QString &studyCourse)
-{
-
+    // Display study courses
+    mGradeTableModel = new GradeTableModel(this);
+    ui->mGradeTable->setModel(mGradeTableModel);
+    mGradeTableModel->populate(mCurrentStudyCourse);
+    ui->mGradeTable->resizeColumnsToContents();
 }

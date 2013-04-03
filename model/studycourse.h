@@ -18,7 +18,7 @@ public:
 
     // Getter / Setter
     const QString& getName() const;
-    const QList<Course*>& getCourses() const;
+    const QList<Course *>& getCourses() const;
 
     /**
      * Retrieve a specific course by it's name.
@@ -36,7 +36,7 @@ public:
 
     QString toString() const;
 
-    void addCourse(const Course* c);
+    void addCourse(Course* c);
 
 private:
     QString mName;

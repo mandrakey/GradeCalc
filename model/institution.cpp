@@ -2,7 +2,7 @@
 #include <iostream>
 Institution::Institution() :
     mName(QString()), mDescription(QString()), mCity(QString()),
-    mStudyCourses(QList<StudyCourse>())
+    mStudyCourses(QList<StudyCourse *>())
 {
 }
 
@@ -49,7 +49,7 @@ const QString& Institution::getCity() const
     return mCity;
 }
 
-const QList<StudyCourse>& Institution::getStudyCourses() const
+const QList<StudyCourse *>& Institution::getStudyCourses() const
 {
     return mStudyCourses;
 }

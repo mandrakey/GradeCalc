@@ -7,11 +7,17 @@
 #include <QMessageBox>
 #include <QFile>
 
+#include <iostream>
+
 #include "programoptions.h"
 #include "model/institution.h"
+#include "model/gradetablemodel.h"
 #include "exceptions/uninitializedexception.h"
 
 namespace po = boost::program_options;
+
+using std::cout;
+using std::endl;
 
 namespace Ui {
 class MainWindow;
@@ -30,9 +36,9 @@ private:
     QList<Institution*> mInstitutions;
     Institution *mCurrentInstitution;
     StudyCourse *mCurrentStudyCourse;
+    GradeTableModel *mGradeTableModel;
 
     void loadData();
-    void showCourses(QString& studyCourse);
 };
 
 #endif // MAINWINDOW_H
