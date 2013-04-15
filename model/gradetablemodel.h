@@ -2,8 +2,7 @@
 #define GRADETABLEMODEL_H
 
 #include <QAbstractTableModel>
-
-#include <iostream>
+#include <QDebug>
 
 #include "exceptions/nullpointerexception.h"
 #include "studycourse.h"

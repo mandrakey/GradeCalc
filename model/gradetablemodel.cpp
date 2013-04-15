@@ -19,9 +19,10 @@ int GradeTableModel::columnCount(const QModelIndex &parent) const
 
 QVariant GradeTableModel::data(const QModelIndex &index, int role) const
 {
-    return (role == Qt::DisplayRole)
+    return mColumns[index.column()][index.row()];
+    /*return (role == Qt::DisplayRole)
             ? mColumns[index.column()][index.row()]
-            : QVariant::Invalid;
+            : QVariant::Invalid;*/
 }
 
 QVariant GradeTableModel::headerData(int section, Qt::Orientation orientation,
@@ -52,6 +53,7 @@ void GradeTableModel::populate(const StudyCourse *studyCourse)
         col.push_back(QString("%1 (%2)").arg(c->getName()).arg(c->getShortname()));
         col.push_back(c->getEcts());
         col.push_back(c->getGrade());
+        qDebug() << Q_FUNC_INFO << c->getName();
         mColumns.push_back(col);
     }
 }

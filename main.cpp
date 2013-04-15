@@ -3,12 +3,13 @@
 #include <QFile>
 #include <QList>
 #include <QString>
+#include <QTranslator>
 
 #include <boost/program_options.hpp>
 
 #include <iostream>
 
-#include "mainwindow.h"
+#include "view/mainwindow.h"
 #include "programoptions.h"
 #include "model/course.h"
 #include "model/studycourse.h"
@@ -27,6 +28,11 @@ int main(int argc, char *argv[])
 {
     ProgramOptions po(argc, argv);
     QApplication a(argc, argv);
+
+    QTranslator translator;
+    translator.load("en_US");
+    a.installTranslator(&translator);
+
     MainWindow w;
     w.show();
 

@@ -17,7 +17,6 @@ LIBS += -L/usr/local/lib
 LIBS += -lboost_program_options
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     model/studycourse.cpp \
     model/institution.cpp \
     model/course.cpp \
@@ -26,9 +25,10 @@ SOURCES += main.cpp\
     programoptions.cpp \
     exceptions/uninitializedexception.cc \
     model/gradetablemodel.cpp \
-    exceptions/nullpointerexception.cpp
+    exceptions/nullpointerexception.cpp \
+    view/mainwindow.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     model/studycourse.h \
     model/institution.h \
     model/course.h \
@@ -37,9 +37,13 @@ HEADERS  += mainwindow.h \
     programoptions.h \
     exceptions/uninitializedexception.h \
     model/gradetablemodel.h \
-    exceptions/nullpointerexception.h
+    exceptions/nullpointerexception.h \
+    view/mainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    +=
 
 OTHER_FILES += \
-    data.xml
+    data.xml \
+    en_US.ts
+
+TRANSLATIONS = en_US.ts
