@@ -15,6 +15,11 @@
 
 #include <QDebug>
 
+#include "model/application.h"
+#include "model/institution.h"
+#include "model/studycourse.h"
+#include "model/course.h"
+
 class MainWindow : public QWidget
 {
     Q_OBJECT

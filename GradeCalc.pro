@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     exceptions/uninitializedexception.cc \
     model/gradetablemodel.cpp \
     exceptions/nullpointerexception.cpp \
-    view/mainwindow.cpp
+    view/mainwindow.cpp \
+    model/application.cpp
 
 HEADERS  += \
     model/studycourse.h \
@@ -38,7 +39,8 @@ HEADERS  += \
     exceptions/uninitializedexception.h \
     model/gradetablemodel.h \
     exceptions/nullpointerexception.h \
-    view/mainwindow.h
+    view/mainwindow.h \
+    model/application.h
 
 FORMS    +=
 

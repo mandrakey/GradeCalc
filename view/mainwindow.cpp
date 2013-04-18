@@ -62,12 +62,27 @@ void MainWindow::initComponents()
 
     this->setMinimumSize(500, 470);
     this->adjustSize();
-
-    this->show();
 }
 
 void MainWindow::show()
 {
+    Application app;
+    app.loadDatabase();
+
+    // Fill institutions list
+    QList<Institution*> &institutions = app.institutions();
+    QList<StudyCourse*> &studyCourses = institutions.first()->getStudyCourses();
+
+    foreach (Institution *i, institutions) {
+        //qDebug() << i.toString();
+        mInstitutionsCombo->addItem(
+                    QString("%1 (%2)").arg(i->getName(), i->getCity()));
+    }
+
+    foreach (StudyCourse *sc, studyCourses) {
+        mStudyCourseCombo->addItem(sc->getName());
+    }
+
     mCourseTable->setColumnCount(4);
     mCourseTable->setRowCount(0);
 

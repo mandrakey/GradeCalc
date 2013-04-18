@@ -24,8 +24,8 @@ Institution::Institution(const QDomNode &node) throw (IllegalXmlException) :
         else if (e.tagName().compare("StudyCourse") == 0)
             this->mStudyCourses.push_back(new StudyCourse(children.at(i)));
     }
-    std::cout << QString("Institution[%1, %2, %3]").arg(mName, mCity, mDescription).
-                 toStdString() << std::endl;
+    /*std::cout << QString("Institution[%1, %2, %3]").arg(mName, mCity, mDescription).
+                 toStdString() << std::endl;*/
 }
 
 Institution::~Institution()
@@ -49,7 +49,7 @@ const QString& Institution::getCity() const
     return mCity;
 }
 
-const QList<StudyCourse *>& Institution::getStudyCourses() const
+QList<StudyCourse *>& Institution::getStudyCourses()
 {
     return mStudyCourses;
 }

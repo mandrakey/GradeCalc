@@ -16,6 +16,8 @@ public:
     StudyCourse(const QDomNode &node) throw (IllegalXmlException);
     explicit StudyCourse(const QString& name);
 
+    ~StudyCourse();
+
     // Getter / Setter
     const QString& getName() const;
     const QList<Course *>& getCourses() const;

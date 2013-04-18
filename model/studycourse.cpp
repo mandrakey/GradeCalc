@@ -22,7 +22,13 @@ StudyCourse::StudyCourse(const QDomNode &node) throw (IllegalXmlException) :
     for (int i = 0; i < courses.size(); ++i)
         this->mCourses.push_back(new Course(courses.at(i)));
 
-    std::cout << QString("StudyCourse[%1, %2]").arg(mName, mTitle).toStdString() << std::endl;
+    //std::cout << QString("StudyCourse[%1, %2]").arg(mName, mTitle).toStdString() << std::endl;
+}
+
+StudyCourse::~StudyCourse()
+{
+    foreach (Course *c, mCourses)
+        delete c;
 }
 
 const QString& StudyCourse::getName() const
