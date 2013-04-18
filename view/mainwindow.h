@@ -11,6 +11,9 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QTableWidget>
 #include <QTranslator>
+#include <QStringList>
+
+#include <QDebug>
 
 class MainWindow : public QWidget
 {
@@ -19,8 +22,13 @@ class MainWindow : public QWidget
 public:
     MainWindow();
 
+public slots:
+    virtual void show();
+
 private:
     void initComponents();
+
+    static QStringList TABLE_HEADERS_H;
 
     QMenuBar *mMenu;
 
