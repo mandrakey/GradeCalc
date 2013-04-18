@@ -2,7 +2,8 @@
 
 MainWindow::MainWindow() :
     QWidget(),
-    mMenu(0)
+    mMenu(0), mMainLayout(0), mTopLayout(0),
+    mInstitutionsCombo(0), mStudyCourseCombo(0), mCourseTable(0)
 {
     initComponents();
 }
@@ -19,8 +20,7 @@ void MainWindow::initComponents()
     //====
     // Main layout: VBox
     mMainLayout = new QVBoxLayout(this);
-    mTopLayout = new QGridLayout(this);
-    this->setLayout(mMainLayout);
+    mTopLayout = new QGridLayout();
 
     mMainLayout->setContentsMargins(10, 30, 10, 10);
 
