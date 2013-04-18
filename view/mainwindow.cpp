@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow() :
-    QMainWindow(),
+    QWidget(),
     mMenu(0)
 {
     initComponents();
@@ -18,8 +18,11 @@ void MainWindow::initComponents()
 
     //====
     // Main layout: VBox
+    mMainLayout = new QVBoxLayout(this);
     mTopLayout = new QGridLayout(this);
-    this->setLayout(mTopLayout);
+    this->setLayout(mMainLayout);
+
+    mMainLayout->setContentsMargins(10, 30, 10, 10);
 
     // Top layout
     QLabel *instiLabel = new QLabel(tr("Institution:"));
@@ -28,10 +31,15 @@ void MainWindow::initComponents()
     mStudyCourseCombo = new QComboBox();
 
     mTopLayout->setSpacing(5);
+    mTopLayout->setColumnStretch(1, 1);
     mTopLayout->addWidget(instiLabel, 0, 0);
     mTopLayout->addWidget(mInstitutionsCombo, 0, 1);
     mTopLayout->addWidget(studycourseLabel, 1, 0);
     mTopLayout->addWidget(mStudyCourseCombo, 1, 1);
+
+    mCourseTable = new QTableWidget(this);
+    mMainLayout->addLayout(mTopLayout);
+    mMainLayout->addWidget(mCourseTable);
 
     this->show();
 }

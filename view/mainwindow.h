@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
@@ -9,9 +9,10 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QTableWidget>
 #include <QTranslator>
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 
@@ -23,10 +24,13 @@ private:
 
     QMenuBar *mMenu;
 
+    QVBoxLayout *mMainLayout;
     QGridLayout *mTopLayout;
 
     QComboBox *mInstitutionsCombo;
     QComboBox *mStudyCourseCombo;
+
+    QTableWidget *mCourseTable;
 };
 
 #endif // MAINWINDOW_H
