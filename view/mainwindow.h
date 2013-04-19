@@ -28,7 +28,8 @@ public:
     MainWindow();
 
 public slots:
-    virtual void show();
+    void show();
+    bool close();
 
 private:
     void initComponents();

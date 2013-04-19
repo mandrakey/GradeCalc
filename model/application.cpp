@@ -6,9 +6,9 @@ Application::Application()
 {
 }
 
-QList<Institution *>& Application::institutions()
+QList<Institution *> Application::institutions() const
 {
-    return INSTITUTIONS;
+    return QList<Institution *>(INSTITUTIONS);
 }
 
 void Application::loadDatabase()
@@ -34,4 +34,11 @@ void Application::loadDatabase()
     for (int i = 0; i < l.size(); ++i) {
         INSTITUTIONS.push_back(new Institution(l.at(i)));
     }
+}
+
+void Application::cleanup()
+{
+    foreach (Institution* i, INSTITUTIONS)
+        delete i;
+    INSTITUTIONS.clear();
 }

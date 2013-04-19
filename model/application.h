@@ -15,12 +15,13 @@ class Application
 public:
     Application();
 
-    QList<Institution*> &institutions();
+    QList<Institution*> institutions() const;
 
     void loadDatabase();
+    void cleanup();
 
 private:
-    static QList<Institution*> INSTITUTIONS;
+    static QList<Institution *> INSTITUTIONS;
 };
 
 #endif // APPLICATION_H

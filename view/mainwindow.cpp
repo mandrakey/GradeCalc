@@ -27,14 +27,15 @@ void MainWindow::initComponents()
 
     fileMenu->addSeparator();
 
+    QAction *quitAction = fileMenu->addAction(tr("&Quit"));
+    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
+
+    // Init help menu
     QMenu *helpMenu = mMenu->addMenu(tr("Help"));
 
     QAction *helpAction = helpMenu->addAction(tr("Help"), 0, 0, QKeySequence::HelpContents);
     helpMenu->addSeparator();
     QAction *aboutAction = helpMenu->addAction(tr("About GradeCalc..."));
-
-    QAction *quitAction = fileMenu->addAction(tr("&Quit"));
-    connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
 
     //====
     // Main layout: VBox
@@ -70,7 +71,7 @@ void MainWindow::show()
     app.loadDatabase();
 
     // Fill institutions list
-    QList<Institution*> &institutions = app.institutions();
+    QList<Institution*> institutions = app.institutions();
     QList<StudyCourse*> &studyCourses = institutions.first()->getStudyCourses();
 
     foreach (Institution *i, institutions) {
@@ -91,4 +92,10 @@ void MainWindow::show()
     mCourseTable->setVerticalHeaderLabels(QStringList());
 
     QWidget::show();
+}
+
+bool MainWindow::close()
+{
+    Application().cleanup();
+    return QWidget::close();
 }
