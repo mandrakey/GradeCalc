@@ -115,7 +115,15 @@ bool MainWindow::close()
 }
 
 void MainWindow::on_testAction_triggered() {
-    Q_UNIMPLEMENTED;
+    //Worksheet ws;
+    try {
+        //ws.toFile("/tmp/test.gcw");
+        Worksheet ws("/tmp/test.gcw");
+    } catch (IllegalArgumentException e) {
+        cerr << "Failed to read test file: " << e.getMessage().toStdString() <<
+                endl;
+    }
+
 }
 
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {

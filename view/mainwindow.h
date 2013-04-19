@@ -12,14 +12,18 @@
 #include <QtWidgets/QTableWidget>
 #include <QTranslator>
 #include <QStringList>
-
 #include <QDebug>
+
+#include <iostream>
+using std::cerr;
+using std::endl;
 
 #include "programoptions.h"
 #include "model/application.h"
 #include "model/institution.h"
 #include "model/studycourse.h"
 #include "model/course.h"
+#include "model/worksheet.h"
 
 class MainWindow : public QWidget
 {

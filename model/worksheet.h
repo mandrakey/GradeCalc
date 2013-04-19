@@ -5,6 +5,8 @@
 #include <QFile>
 #include <QDataStream>
 
+#include <QDebug>
+
 #include "exceptions/illegalargumentexception.h"
 
 class Worksheet
@@ -15,14 +17,14 @@ public:
 
     int institutionId() const;
     int studyCourseId() const;
-    QHash<int, int> grades() const;
+    QHash<int, double> grades() const;
 
     void toFile(const QString &targetFile) const;
 
 private:
     int mInstitutionId;
     int mStudyCourseId;
-    QHash<int, int> mGrades;
+    QHash<int, double> mGrades;
 };
 
 #endif // WORKSHEET_H
