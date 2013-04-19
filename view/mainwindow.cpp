@@ -69,6 +69,12 @@ void MainWindow::initComponents()
     this->adjustSize();
 }
 
+void MainWindow::clearCourseTable()
+{
+    mCourseTable->clear();
+    mCourseTable->setHorizontalHeaderLabels(TABLE_HEADERS_H);
+}
+
 void MainWindow::show()
 {
     Application app;
@@ -93,8 +99,8 @@ void MainWindow::show()
     mCourseTable->setRowCount(0);
 
     TABLE_HEADERS_H << "Semester" << "Name" << "ECTS" << "Note";
-    mCourseTable->setHorizontalHeaderLabels(TABLE_HEADERS_H);
-    mCourseTable->setVerticalHeaderLabels(QStringList());
+    this->clearCourseTable();
+    on_StudyCourseCombo_currentIndexChanged(0);
 
     QWidget::show();
 }
@@ -107,5 +113,24 @@ bool MainWindow::close()
 
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
     StudyCourse *sc = mCurrentInstitution->getStudyCourses().at(index);
-    qDebug() << "Selected course:" << sc->getName();
+    QList<Course *> courses = sc->getCourses();
+
+    clearCourseTable();
+    mCourseTable->setRowCount(courses.size());
+    for (int i = 0; i < courses.size(); ++i) {
+        Course *c = courses.at(i);
+        QTableWidgetItem *semester =
+                new QTableWidgetItem(QString("%1").arg(c->getSemester()));
+        QTableWidgetItem *name =
+                new QTableWidgetItem(QString("%1").arg(c->getName()));
+        QTableWidgetItem *ects =
+                new QTableWidgetItem(QString("%1").arg(c->getEcts()));
+        QTableWidgetItem *grade =
+                new QTableWidgetItem(QString("%1").arg(c->getGrade()));
+
+        mCourseTable->setItem(i, 0, semester);
+        mCourseTable->setItem(i, 1, name);
+        mCourseTable->setItem(i, 2, ects);
+        mCourseTable->setItem(i, 3, grade);
+    }
 }

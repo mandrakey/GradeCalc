@@ -36,9 +36,9 @@ const QString& StudyCourse::getName() const
     return mName;
 }
 
-const QList<Course *>& StudyCourse::getCourses() const
+const QList<Course *> StudyCourse::getCourses() const
 {
-    return mCourses;
+    return QList<Course *>(mCourses);
 }
 
 const Course* StudyCourse::getCourse(const QString &name) const throw (QString)

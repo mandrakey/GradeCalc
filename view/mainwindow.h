@@ -41,6 +41,7 @@ private slots:
 
 private:
     void initComponents();
+    void clearCourseTable();
 
     static QStringList TABLE_HEADERS_H;
 

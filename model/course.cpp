@@ -25,10 +25,10 @@ Course::Course(const QDomNode &node) throw (IllegalXmlException) :
     if (!element.hasAttribute("semester"))
         throw IllegalXmlException("Course needs a semester");
 
-    this->mShortname = element.attribute("shortname");
+    this->mShortname = element.attribute("shortname").trimmed();
     this->mEcts = element.attribute("ects").toDouble();
     this->mSemester = element.attribute("semester").toInt();
-    this->mName = element.text();
+    this->mName = element.text().trimmed();
 }
 
 int Course::getSemester() const

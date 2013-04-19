@@ -20,7 +20,7 @@ public:
 
     // Getter / Setter
     const QString& getName() const;
-    const QList<Course *>& getCourses() const;
+    const QList<Course *> getCourses() const;
 
     /**
      * Retrieve a specific course by it's name.
