@@ -15,6 +15,7 @@
 
 #include <QDebug>
 
+#include "programoptions.h"
 #include "model/application.h"
 #include "model/institution.h"
 #include "model/studycourse.h"

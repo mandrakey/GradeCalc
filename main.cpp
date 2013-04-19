@@ -24,9 +24,30 @@ namespace po = boost::program_options;
 
 void test();
 
+void initProgramOptions()
+{
+    ProgramOptions po;
+
+    // Create Options
+    ProgramOptions::Option helpOption("help", "?", "display this help");
+    ProgramOptions::Option worksheetOption(QVariant::String, "worksheet", "w",
+                                           "worksheet to load on startup",
+                                           QVariant(), true, 1);
+
+    po << helpOption << worksheetOption;
+}
+
 int main(int argc, char *argv[])
 {
-    ProgramOptions po(argc, argv);
+    initProgramOptions();
+    ProgramOptions po;
+    po.parse(argc, argv);
+
+    if (po.recognized("help")) {
+        po.printHelp();
+        return 1;
+    }
+
     QApplication a(argc, argv);
 
     QTranslator translator;
