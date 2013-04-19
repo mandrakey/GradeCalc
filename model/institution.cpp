@@ -1,7 +1,7 @@
 #include "institution.h"
 #include <iostream>
 Institution::Institution() :
-    mName(QString()), mDescription(QString()), mCity(QString()),
+    mId(-1), mName(QString()), mDescription(QString()), mCity(QString()),
     mStudyCourses(QList<StudyCourse *>())
 {
 }
@@ -11,6 +11,9 @@ Institution::Institution(const QDomNode &node) throw (IllegalXmlException) :
 {
     QDomElement element = node.toElement();
     QDomNodeList children = element.childNodes();
+
+    if (element.hasAttribute("id"))
+        mId = element.attribute("id").toInt();
 
     for (int i = 0; i < children.size(); ++i) {
         QDomElement e = children.at(i).toElement();
@@ -24,6 +27,10 @@ Institution::Institution(const QDomNode &node) throw (IllegalXmlException) :
         else if (e.tagName().compare("StudyCourse") == 0)
             this->mStudyCourses.push_back(new StudyCourse(children.at(i)));
     }
+
+    // Check validity
+    if (mId == -1)
+        throw IllegalXmlException(QString("Institution %1 has no ID attribute").arg(mName));
     /*std::cout << QString("Institution[%1, %2, %3]").arg(mName, mCity, mDescription).
                  toStdString() << std::endl;*/
 }
@@ -32,6 +39,11 @@ Institution::~Institution()
 {
     foreach (StudyCourse *s, mStudyCourses)
         delete s;
+}
+
+int Institution::getId() const
+{
+    return mId;
 }
 
 const QString& Institution::getName() const

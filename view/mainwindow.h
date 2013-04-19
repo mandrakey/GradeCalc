@@ -31,6 +31,7 @@ public:
 public slots:
     void show();
     bool close();
+    void on_testAction_triggered();
 
 private slots:
     /**

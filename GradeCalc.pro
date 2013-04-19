@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     #model/gradetablemodel.cpp \
     exceptions/nullpointerexception.cpp \
     view/mainwindow.cpp \
-    model/application.cpp
+    model/application.cpp \
+    model/worksheet.cpp \
+    exceptions/illegalargumentexception.cpp
 
 HEADERS  += \
     model/studycourse.h \
@@ -40,7 +42,9 @@ HEADERS  += \
     #model/gradetablemodel.h \
     exceptions/nullpointerexception.h \
     view/mainwindow.h \
-    model/application.h
+    model/application.h \
+    model/worksheet.h \
+    exceptions/illegalargumentexception.h
 
 FORMS    +=
 

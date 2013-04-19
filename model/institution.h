@@ -22,6 +22,7 @@ public:
     ~Institution();
 
     // Getter / Setter
+    int getId() const;
     const QString& getName() const;
     const QString& getDescription() const;
     const QString& getCity() const;
@@ -30,6 +31,7 @@ public:
     QString toString() const;
 
 private:
+    int mId;
     QString mName;
     QString mDescription;
     QString mCity;

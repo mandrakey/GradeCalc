@@ -38,6 +38,9 @@ void MainWindow::initComponents()
     helpMenu->addSeparator();
     QAction *aboutAction = helpMenu->addAction(tr("About GradeCalc..."));
 
+    QAction *testAction = helpMenu->addAction(tr("Test it!"));
+    connect(testAction, SIGNAL(triggered()), this, SLOT(on_testAction_triggered()));
+
     //====
     // Main layout: VBox
     mMainLayout = new QVBoxLayout(this);
@@ -109,6 +112,10 @@ bool MainWindow::close()
 {
     Application().cleanup();
     return QWidget::close();
+}
+
+void MainWindow::on_testAction_triggered() {
+    Q_UNIMPLEMENTED;
 }
 
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
