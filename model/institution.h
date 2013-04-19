@@ -25,7 +25,7 @@ public:
     const QString& getName() const;
     const QString& getDescription() const;
     const QString& getCity() const;
-    QList<StudyCourse *>& getStudyCourses();
+    QList<StudyCourse *> getStudyCourses() const;
 
     QString toString() const;
 

@@ -31,6 +31,14 @@ public slots:
     void show();
     bool close();
 
+private slots:
+    /**
+     * Handle selection of another StudyCourse in the combo box.
+     * @param int index The new selected index (same as index in courses list)
+     * @todo Really display the courses attached to StudyCourse
+     */
+    void on_StudyCourseCombo_currentIndexChanged(int);
+
 private:
     void initComponents();
 
@@ -45,6 +53,9 @@ private:
     QComboBox *mStudyCourseCombo;
 
     QTableWidget *mCourseTable;
+
+    Institution *mCurrentInstitution;
+    StudyCourse *mCurrentStudyCourse;
 };
 
 #endif // MAINWINDOW_H

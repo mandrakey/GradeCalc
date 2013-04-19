@@ -5,7 +5,8 @@ QStringList MainWindow::TABLE_HEADERS_H;
 MainWindow::MainWindow() :
     QWidget(),
     mMenu(0), mMainLayout(0), mTopLayout(0),
-    mInstitutionsCombo(0), mStudyCourseCombo(0), mCourseTable(0)
+    mInstitutionsCombo(0), mStudyCourseCombo(0), mCourseTable(0),
+    mCurrentInstitution(0), mCurrentStudyCourse(0)
 {
     initComponents();
 }
@@ -50,6 +51,9 @@ void MainWindow::initComponents()
     mInstitutionsCombo = new QComboBox();
     mStudyCourseCombo = new QComboBox();
 
+    connect(mStudyCourseCombo, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(on_StudyCourseCombo_currentIndexChanged(int)));
+
     mTopLayout->setSpacing(5);
     mTopLayout->setColumnStretch(1, 1);
     mTopLayout->addWidget(instiLabel, 0, 0);
@@ -72,10 +76,11 @@ void MainWindow::show()
 
     // Fill institutions list
     QList<Institution*> institutions = app.institutions();
-    QList<StudyCourse*> &studyCourses = institutions.first()->getStudyCourses();
+    mCurrentInstitution = institutions.first();
+    QList<StudyCourse*> studyCourses = mCurrentInstitution->getStudyCourses();
+    mCurrentStudyCourse = studyCourses.first();
 
     foreach (Institution *i, institutions) {
-        //qDebug() << i.toString();
         mInstitutionsCombo->addItem(
                     QString("%1 (%2)").arg(i->getName(), i->getCity()));
     }
@@ -98,4 +103,9 @@ bool MainWindow::close()
 {
     Application().cleanup();
     return QWidget::close();
+}
+
+void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
+    StudyCourse *sc = mCurrentInstitution->getStudyCourses().at(index);
+    qDebug() << "Selected course:" << sc->getName();
 }

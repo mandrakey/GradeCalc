@@ -49,9 +49,9 @@ const QString& Institution::getCity() const
     return mCity;
 }
 
-QList<StudyCourse *>& Institution::getStudyCourses()
+QList<StudyCourse *> Institution::getStudyCourses() const
 {
-    return mStudyCourses;
+    return QList<StudyCourse *>(mStudyCourses);
 }
 
 QString Institution::toString() const
