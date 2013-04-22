@@ -26,6 +26,12 @@ using std::endl;
 #include "model/course.h"
 #include "model/worksheet.h"
 
+/**
+ * Tryout mode.
+ * @see main.cpp
+ */
+extern const bool TRYOUT_MODE;
+
 class MainWindow : public QWidget
 {
     Q_OBJECT

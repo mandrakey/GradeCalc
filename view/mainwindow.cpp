@@ -38,8 +38,10 @@ void MainWindow::initComponents()
     helpMenu->addSeparator();
     QAction *aboutAction = helpMenu->addAction(tr("About GradeCalc..."));
 
-    QAction *testAction = helpMenu->addAction(tr("Test it!"));
-    connect(testAction, SIGNAL(triggered()), this, SLOT(on_testAction_triggered()));
+    if (TRYOUT_MODE) {
+        QAction *testAction = helpMenu->addAction(tr("Test it!"));
+        connect(testAction, SIGNAL(triggered()), this, SLOT(on_testAction_triggered()));
+    }
 
     //====
     // Main layout: VBox
@@ -115,6 +117,9 @@ bool MainWindow::close()
 }
 
 void MainWindow::on_testAction_triggered() {
+    if (!TRYOUT_MODE)
+        return;
+
     QMessageBox::StandardButton s = QMessageBox::question(this, "Testen", "Laden?",
                                                           QMessageBox::Yes|QMessageBox::No);
 

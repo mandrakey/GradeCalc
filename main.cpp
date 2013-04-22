@@ -22,7 +22,7 @@ using std::string;
 
 namespace po = boost::program_options;
 
-void test();
+const bool TRYOUT_MODE = true;
 
 void initProgramOptions()
 {
@@ -58,38 +58,4 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
-
-    //test();
-}
-
-void test()
-{
-    QDomDocument d("data");
-    QFile f("./data.xml");
-
-    if (!f.open(QIODevice::ReadOnly)) {
-        cerr << "Failed to open file '" << f.fileName().toStdString() << "'" << endl;
-        return;
-    }
-
-    if (!d.setContent(&f)) {
-        cerr << "Failed to load XML content" << endl;
-        f.close();
-        return;
-    }
-
-    // Get root node
-    cout << "Read file..." << endl;
-    QDomElement root = d.documentElement();
-    QList<Institution> institutions;
-    QDomNodeList l = root.elementsByTagName("Institution");
-
-    for (int i = 0; i < l.size(); ++i) {
-        institutions.push_back(Institution(l.at(i)));
-    }
-
-    for (int i = 0; i < institutions.size(); ++i) {
-        cout << "# Inst: " << i << endl;
-        cout << institutions.at(i).toString().toStdString() << endl;
-    }
 }
