@@ -155,8 +155,8 @@ void MainWindow::on_testAction_triggered() {
 }
 
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
-    StudyCourse *sc = mCurrentInstitution->getStudyCourses().at(index);
-    QList<Course *> courses = sc->getCourses();
+    mCurrentStudyCourse = mCurrentInstitution->getStudyCourses().at(index);
+    QList<Course *> courses = mCurrentStudyCourse->getCourses();
 
     clearCourseTable();
     mCourseTable->blockSignals(true);
@@ -189,5 +189,16 @@ void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
 
 void MainWindow::on_mGradeTable_cellChanged(int row, int column)
 {
-    QMessageBox::information(this, "Cell changed", QString("[%1,%2]").arg(row).arg(column));
+    mCourseTable->blockSignals(true);
+    Course *c = mCurrentStudyCourse->getCourses().at(row);
+    double newGrade = mCourseTable->item(row, column)->text().toDouble();
+
+    try {
+        c->setGrade(newGrade);
+    } catch (QString e) {
+        QMessageBox::warning(this, "Ungültige Eingabe", e);
+        mCourseTable->item(row, column)->setText(QString("%1").arg(c->getGrade()));
+    }
+
+    mCourseTable->blockSignals(false);
 }

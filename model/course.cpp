@@ -74,6 +74,10 @@ void Course::setGrade(double grade) throw (QString)
     if (mEcts <= 0.0)
         throw QString("Need ECTS before value can be calculated and grade be "
                       "set");
+
+    if (grade < 1.0 || grade > 5.0)
+        throw QString("The value for a grade must be within 1.0 and 5.0. Given"
+                      " value: %1").arg(grade);
     mGrade = grade;
     mValue = mGrade * mEcts;
 }
