@@ -52,11 +52,14 @@ private slots:
      */
     void on_StudyCourseCombo_currentIndexChanged(int);
 
+    void on_mGradeTable_cellChanged(int row, int column);
+
 private:
     void initComponents();
     void clearCourseTable();
 
     static QStringList TABLE_HEADERS_H;
+    static const Qt::ItemFlag DISABLE_EDIT_FLAG;
 
     QMenuBar *mMenu;
 

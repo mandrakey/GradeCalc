@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 QStringList MainWindow::TABLE_HEADERS_H;
+const Qt::ItemFlag MainWindow::DISABLE_EDIT_FLAG = Qt::ItemFlag(~Qt::ItemIsEditable);
 
 MainWindow::MainWindow() :
     QWidget(),
@@ -70,6 +71,8 @@ void MainWindow::initComponents()
     mMainLayout->addLayout(mTopLayout);
     mMainLayout->addWidget(mCourseTable);
 
+    connect(mCourseTable, SIGNAL(cellChanged(int,int)), this, SLOT(on_mGradeTable_cellChanged(int,int)));
+
     this->setMinimumSize(500, 470);
     this->adjustSize();
 }
@@ -78,6 +81,7 @@ void MainWindow::clearCourseTable()
 {
     mCourseTable->clear();
     mCourseTable->setHorizontalHeaderLabels(TABLE_HEADERS_H);
+    mCourseTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 void MainWindow::show()
@@ -155,15 +159,23 @@ void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
     QList<Course *> courses = sc->getCourses();
 
     clearCourseTable();
+    mCourseTable->blockSignals(true);
     mCourseTable->setRowCount(courses.size());
     for (int i = 0; i < courses.size(); ++i) {
         Course *c = courses.at(i);
+
         QTableWidgetItem *semester =
                 new QTableWidgetItem(QString("%1").arg(c->getSemester()));
+        semester->setFlags(DISABLE_EDIT_FLAG);
+
         QTableWidgetItem *name =
                 new QTableWidgetItem(QString("%1").arg(c->getName()));
+        name->setFlags(DISABLE_EDIT_FLAG);
+
         QTableWidgetItem *ects =
                 new QTableWidgetItem(QString("%1").arg(c->getEcts()));
+        ects->setFlags(DISABLE_EDIT_FLAG);
+
         QTableWidgetItem *grade =
                 new QTableWidgetItem(QString("%1").arg(c->getGrade()));
 
@@ -172,4 +184,10 @@ void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
         mCourseTable->setItem(i, 2, ects);
         mCourseTable->setItem(i, 3, grade);
     }
+    mCourseTable->blockSignals(false);
+}
+
+void MainWindow::on_mGradeTable_cellChanged(int row, int column)
+{
+    QMessageBox::information(this, "Cell changed", QString("[%1,%2]").arg(row).arg(column));
 }
