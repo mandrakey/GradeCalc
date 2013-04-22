@@ -18,6 +18,9 @@ public:
     int institutionId() const;
     int studyCourseId() const;
     QHash<int, double> grades() const;
+    void setInstitutionId(int institutionId);
+    void setStudyCourseId(int studyCourseId);
+    void setGrade(int key, double value);
 
     void toFile(const QString &targetFile) const;
 

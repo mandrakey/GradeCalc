@@ -47,6 +47,21 @@ QHash<int,double> Worksheet::grades() const
     return QHash<int,double>(mGrades);
 }
 
+void Worksheet::setInstitutionId(int institutionId)
+{
+    mInstitutionId = institutionId;
+}
+
+void Worksheet::setStudyCourseId(int studyCourseId)
+{
+    mStudyCourseId = studyCourseId;
+}
+
+void Worksheet::setGrade(int key, double value)
+{
+    mGrades.insert(key, value);
+}
+
 void Worksheet::toFile(const QString &targetFile) const
 {
     QFile f(targetFile);

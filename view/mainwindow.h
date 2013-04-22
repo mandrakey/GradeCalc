@@ -10,6 +10,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QMessageBox>
 #include <QTranslator>
 #include <QStringList>
 #include <QDebug>

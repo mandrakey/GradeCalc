@@ -24,7 +24,7 @@ void MainWindow::initComponents()
     //connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_loadSheetAction_click()));
 
     QAction *saveSheetAction = fileMenu->addAction(tr("&Save worksheet"));
-    //connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_saveSheetAction_click()));
+    //connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_saveSheetActionint_click()));
 
     fileMenu->addSeparator();
 
@@ -115,15 +115,34 @@ bool MainWindow::close()
 }
 
 void MainWindow::on_testAction_triggered() {
-    //Worksheet ws;
-    try {
-        //ws.toFile("/tmp/test.gcw");
-        Worksheet ws("/tmp/test.gcw");
-    } catch (IllegalArgumentException e) {
-        cerr << "Failed to read test file: " << e.getMessage().toStdString() <<
-                endl;
-    }
+    QMessageBox::StandardButton s = QMessageBox::question(this, "Testen", "Laden?",
+                                                          QMessageBox::Yes|QMessageBox::No);
 
+    try {
+        if (s == QMessageBox::Yes) {
+            Worksheet ws("/tmp/test.gcw");
+
+            qDebug() << "Institution:" << ws.institutionId();
+            qDebug() << "StudyCourse:" << ws.studyCourseId();
+            qDebug() << "Grades:";
+
+            QHash<int,double> grades = ws.grades();
+            foreach (int key, grades.keys()) {
+                qDebug() << "Course" << key << ":" << grades.value(key);
+            }
+        } else {
+            Worksheet ws;
+            ws.setInstitutionId(1);
+            ws.setStudyCourseId(5);
+            ws.setGrade(0, 2.3);
+            ws.setGrade(1, 1.7);
+            ws.toFile("/tmp/test.gcw");
+        }
+    } catch (IllegalArgumentException e) {
+        QMessageBox::warning(this, "Fehler", QString("Die gewünschte Aktion "
+                                                     "konnte nicht durchgeführt "
+                                                     "werden: %1").arg(e.getMessage()));
+    }
 }
 
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
