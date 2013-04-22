@@ -168,6 +168,24 @@ void MainWindow::on_testAction_triggered() {
     }
 }
 
+void MainWindow::recalculateResult() {
+    double sumEcts = 0.0;
+    double sumValue = 0.0;
+    double resultGrade = 0.0;
+
+    foreach (Course *c, mCurrentStudyCourse->getCourses()) {
+        if (c->getGrade() < 1.0)
+            continue;
+        sumEcts += c->getEcts();
+        sumValue += c->getValue();
+    }
+
+    qDebug() << Q_FUNC_INFO << sumValue << sumEcts;
+    resultGrade = sumValue / sumEcts;
+    mResultEctsLabel->setText(QString("<b>%1</b>").arg(sumValue));
+    mResultGradeLabel->setText(QString("<b>%1</b>").arg(resultGrade));
+}
+
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
     mCurrentStudyCourse = mCurrentInstitution->getStudyCourses().at(index);
     QList<Course *> courses = mCurrentStudyCourse->getCourses();
@@ -213,6 +231,8 @@ void MainWindow::on_mGradeTable_cellChanged(int row, int column)
         QMessageBox::warning(this, "Ungültige Eingabe", e);
         mCourseTable->item(row, column)->setText(QString("%1").arg(c->getGrade()));
     }
+
+    recalculateResult();
 
     mCourseTable->blockSignals(false);
 }
