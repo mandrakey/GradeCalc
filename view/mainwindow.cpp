@@ -48,6 +48,7 @@ void MainWindow::initComponents()
     // Main layout: VBox
     mMainLayout = new QVBoxLayout(this);
     mTopLayout = new QGridLayout();
+    mResultLayout = new QGridLayout();
 
     mMainLayout->setContentsMargins(10, 30, 10, 10);
 
@@ -67,9 +68,22 @@ void MainWindow::initComponents()
     mTopLayout->addWidget(studycourseLabel, 1, 0);
     mTopLayout->addWidget(mStudyCourseCombo, 1, 1);
 
+    // Result layout
+    QLabel *resultEctsLabel = new QLabel(tr("Result ECTS:"));
+    QLabel *resultGradeLabel = new QLabel(tr("Resulting grade:"));
+    mResultEctsLabel = new QLabel("<b>N/A</b>");
+    mResultGradeLabel = new QLabel("<b>N/A</b>");
+
+    mResultLayout->setSpacing(5);
+    mResultLayout->addWidget(resultEctsLabel, 0, 0);
+    mResultLayout->addWidget(mResultEctsLabel, 0, 1);
+    mResultLayout->addWidget(resultGradeLabel, 0, 2);
+    mResultLayout->addWidget(mResultGradeLabel, 0, 3);
+
     mCourseTable = new QTableWidget(this);
     mMainLayout->addLayout(mTopLayout);
     mMainLayout->addWidget(mCourseTable);
+    mMainLayout->addLayout(mResultLayout);
 
     connect(mCourseTable, SIGNAL(cellChanged(int,int)), this, SLOT(on_mGradeTable_cellChanged(int,int)));
 

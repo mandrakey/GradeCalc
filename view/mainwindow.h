@@ -65,9 +65,13 @@ private:
 
     QVBoxLayout *mMainLayout;
     QGridLayout *mTopLayout;
+    QGridLayout *mResultLayout;
 
     QComboBox *mInstitutionsCombo;
     QComboBox *mStudyCourseCombo;
+
+    QLabel *mResultEctsLabel;
+    QLabel *mResultGradeLabel;
 
     QTableWidget *mCourseTable;
 
