@@ -28,8 +28,16 @@ Worksheet::Worksheet(const QString &sourceFile) throw (IllegalArgumentException)
     }
 
     f.close();
+}
 
-
+Worksheet::Worksheet(int institutionId, const StudyCourse *studyCourse) :
+    mInstitutionId(institutionId), mStudyCourseId(studyCourse->getId()),
+    mGrades()
+{
+    QList<Course *> courses = studyCourse->getCourses();
+    int i = 0;
+    foreach (Course *c, courses)
+        mGrades.insert(i++, c->getGrade());
 }
 
 int Worksheet::institutionId() const

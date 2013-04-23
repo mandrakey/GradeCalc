@@ -1,7 +1,7 @@
 #include "studycourse.h"
 #include <iostream>
 StudyCourse::StudyCourse() :
-    mName(QString()), mTitle(QString()), mCourses(QList<Course*>())
+    mId(-1), mName(QString()), mTitle(QString()), mCourses(QList<Course*>())
 {
 }
 
@@ -10,11 +10,14 @@ StudyCourse::StudyCourse(const QDomNode &node) throw (IllegalXmlException) :
 {
     QDomElement element = node.toElement();
 
+    if (!element.hasAttribute("id"))
+        throw IllegalXmlException("StudyCourse needs an ID");
     if (!element.hasAttribute("name"))
         throw IllegalXmlException("StudyCourse needs a name");
     if (!element.hasAttribute("title"))
         throw IllegalXmlException("StudyCourse needs a resulting title");
 
+    this->mId = element.attribute("id").toInt();
     this->mName = element.attribute("name");
     this->mTitle = element.attribute("title");
 
@@ -29,6 +32,11 @@ StudyCourse::~StudyCourse()
 {
     foreach (Course *c, mCourses)
         delete c;
+}
+
+int StudyCourse::getId() const
+{
+    return mId;
 }
 
 const QString& StudyCourse::getName() const

@@ -19,6 +19,7 @@ public:
     ~StudyCourse();
 
     // Getter / Setter
+    int getId() const;
     const QString& getName() const;
     const QList<Course *> getCourses() const;
 
@@ -41,6 +42,7 @@ public:
     void addCourse(Course* c);
 
 private:
+    int mId;
     QString mName;
     QString mTitle;
     QList<Course*> mCourses;

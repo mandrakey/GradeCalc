@@ -5,7 +5,7 @@
         <city>Zweibrücken</city>
         <description>Description :)</description>
 
-        <StudyCourse name="Medieninformatik PO2006" title="B.Sc.">
+        <StudyCourse id="0" name="Medieninformatik PO2006" title="B.Sc.">
             <Course shortname="GDI" ects="10" semester="1">
                 Grundlagen der Informatik
             </Course>
@@ -17,7 +17,7 @@
             </Course>
         </StudyCourse>
         
-        <StudyCourse name="Angewandte Informatik PO2006" title="B.Sc.">
+        <StudyCourse id="1" name="Angewandte Informatik PO2006" title="B.Sc.">
             <Course shortname="GDI" ects="10" semester="1">
                 Grundlagen der Informatik
             </Course>

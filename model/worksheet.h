@@ -8,12 +8,15 @@
 #include <QDebug>
 
 #include "exceptions/illegalargumentexception.h"
+#include "model/studycourse.h"
+#include "model/course.h"
 
 class Worksheet
 {
 public:
     Worksheet();
-    Worksheet(const QString &sourceFile) throw (IllegalArgumentException);
+    explicit Worksheet(const QString &sourceFile) throw (IllegalArgumentException);
+    Worksheet(int institutionId, const StudyCourse *studyCourse);
 
     int institutionId() const;
     int studyCourseId() const;
