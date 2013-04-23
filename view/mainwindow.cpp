@@ -25,7 +25,7 @@ void MainWindow::initComponents()
     //connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_loadSheetAction_click()));
 
     QAction *saveSheetAction = fileMenu->addAction(tr("&Save worksheet"));
-    //connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_saveSheetActionint_click()));
+    connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_saveSheetAction_triggered()));
 
     fileMenu->addSeparator();
 
@@ -235,4 +235,23 @@ void MainWindow::on_mGradeTable_cellChanged(int row, int column)
     recalculateResult();
 
     mCourseTable->blockSignals(false);
+}
+
+void MainWindow::on_saveSheetAction_triggered()
+{
+    Worksheet w(mCurrentInstitution->getId(), mCurrentStudyCourse);
+    QString filename =
+            QFileDialog::getSaveFileName(this,
+                                         tr("Select file "
+                                            "to save data to"),
+                                         QString(),
+                                         tr("GradeCalc Worksheet (*.gcw)"));
+
+    if (filename.isEmpty())
+        return;
+
+    if (!filename.endsWith(QString(".gcw")))
+        filename.append(QString(".gcw"));
+
+    w.toFile(filename);
 }

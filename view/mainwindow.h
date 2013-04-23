@@ -11,6 +11,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QFileDialog>
 #include <QTranslator>
 #include <QStringList>
 #include <QDebug>
@@ -54,6 +55,8 @@ private slots:
     void on_StudyCourseCombo_currentIndexChanged(int);
 
     void on_mGradeTable_cellChanged(int row, int column);
+
+    void on_saveSheetAction_triggered();
 
 private:
     void initComponents();
