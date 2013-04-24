@@ -223,6 +223,8 @@ void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
         mCourseTable->setItem(i, 3, grade);
     }
     mCourseTable->blockSignals(false);
+
+    recalculateResult();
 }
 
 void MainWindow::on_mGradeTable_cellChanged(int row, int column)
