@@ -58,6 +58,8 @@ private slots:
 
     void on_saveSheetAction_triggered();
 
+    void on_loadSheetAction_triggered();
+
 private:
     void initComponents();
     void clearCourseTable();

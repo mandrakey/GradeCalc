@@ -18,11 +18,12 @@ void MainWindow::initComponents()
     mMenu = new QMenuBar(this);
     QMenu *fileMenu = mMenu->addMenu(tr("&File"));
 
+    // todo: Implement newSheetAction
     QAction *newSheetAction = fileMenu->addAction(tr("&New worksheet"));
     //connect(newSheetAction, SIGNAL(triggered()), this, SLOT(on_newSheetAction_click()));
 
     QAction *loadSheetAction = fileMenu->addAction(tr("&Load worksheet"));
-    //connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_loadSheetAction_click()));
+    connect(loadSheetAction, SIGNAL(triggered()), this, SLOT(on_loadSheetAction_triggered()));
 
     QAction *saveSheetAction = fileMenu->addAction(tr("&Save worksheet"));
     connect(saveSheetAction, SIGNAL(triggered()), this, SLOT(on_saveSheetAction_triggered()));
@@ -254,4 +255,62 @@ void MainWindow::on_saveSheetAction_triggered()
         filename.append(QString(".gcw"));
 
     w.toFile(filename);
+}
+
+void MainWindow::on_loadSheetAction_triggered()
+{
+    // todo: Refactor FileDialog filter to const static member
+    QString filename =
+            QFileDialog::getOpenFileName(this,
+                                         tr("Select file to load data from"),
+                                         QString(),
+                                         tr("GradeCalc Worksheet (*.gcw)"));
+
+    if (filename.isEmpty())
+        return;
+
+    if (!filename.endsWith(".gcw"))
+        filename.append(QString(".gcw"));
+
+    Worksheet w(filename);
+    Application app;
+
+    // Set new institution selection
+    QList<Institution *> institutions = app.institutions();
+    if (w.institutionId() < 0 || w.institutionId() > institutions.size()) {
+        QMessageBox::warning(this, "Error in worksheet",
+                             QString("The institution #%1 does "
+                                     "not exist.").arg(w.institutionId()));
+        return;
+    }
+    mCurrentInstitution = institutions.at(w.institutionId());
+    mInstitutionsCombo->setCurrentIndex(w.institutionId());
+
+    // Set new studyCourse selection
+    QList<StudyCourse *> studyCourses = mCurrentInstitution->getStudyCourses();
+    if (w.studyCourseId() < 0 || w.studyCourseId() > studyCourses.size()) {
+        QMessageBox::warning(this, "Error in worksheet",
+                             QString("The study course #%1 does "
+                                     "not exist").arg(w.studyCourseId()));
+        return;
+    }
+    mStudyCourseCombo->setCurrentIndex(w.studyCourseId());
+
+    // Set grades from worksheet
+    QHash<int,double> grades = w.grades();
+    foreach (int k, grades.keys()) {
+        if (grades.value(k) < 1.0 || grades.value(k) > 5.0)
+            continue;
+
+        try {
+            mCurrentStudyCourse->getCourse(k)->setGrade(grades.value(k));
+        } catch (QString msg) {
+            QMessageBox::warning(this, "Error loading grades", msg);
+            return;
+        }
+    }
+
+    // Trigger UI changes
+    on_StudyCourseCombo_currentIndexChanged(w.studyCourseId());
+    recalculateResult();
 }

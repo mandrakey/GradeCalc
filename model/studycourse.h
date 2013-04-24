@@ -28,14 +28,14 @@ public:
      * @param name Name of the course to search for
      * @return Pointer to the course being searched
      */
-    const Course* getCourse(const QString& name) const throw (QString);
+    Course* getCourse(const QString& name) const throw (QString);
 
     /**
      * Retrieve a specific course by it's list index.
      * @param index List index, starting with 0
      * @return Pointer to the requested course
      */
-    const Course* getCourse(int index) const throw (QString);
+    Course* getCourse(int index) const throw (QString);
 
     QString toString() const;
 
