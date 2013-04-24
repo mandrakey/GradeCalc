@@ -26,6 +26,7 @@ using std::endl;
 #include "model/studycourse.h"
 #include "model/course.h"
 #include "model/worksheet.h"
+#include "view/aboutwindow.h"
 
 /**
  * Tryout mode.
@@ -60,6 +61,8 @@ private slots:
     void on_loadSheetAction_triggered();
 
     void on_newSheetAction_triggered();
+
+    void on_aboutAction_triggered();
 
 private:
     void initComponents();

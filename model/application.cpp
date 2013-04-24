@@ -2,6 +2,11 @@
 
 QList<Institution*> Application::INSTITUTIONS;
 
+const char *Application::APPNAME = "GradeCalc";
+const char *Application::VERSION = "1.0";
+const char *Application::COPYRIGHT = "Copyright (C) 2013 Maurice Bleuel";
+const char *Application::LICENSE = "GPL or so...";
+
 Application::Application()
 {
 }
@@ -9,6 +14,24 @@ Application::Application()
 QList<Institution *> Application::institutions() const
 {
     return QList<Institution *>(INSTITUTIONS);
+}
+
+const QString Application::appName() const
+{
+    return APPNAME;
+}
+
+const QString Application::version() const
+{
+    return VERSION;
+}
+
+const QString Application::copyright() const {
+    return COPYRIGHT;
+}
+
+const QString Application::license() const {
+    return LICENSE;
 }
 
 void Application::loadDatabase()

@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     view/mainwindow.cpp \
     model/application.cpp \
     model/worksheet.cpp \
-    exceptions/illegalargumentexception.cpp
+    exceptions/illegalargumentexception.cpp \
+    view/aboutwindow.cpp
 
 HEADERS  += \
     model/studycourse.h \
@@ -44,7 +45,8 @@ HEADERS  += \
     view/mainwindow.h \
     model/application.h \
     model/worksheet.h \
-    exceptions/illegalargumentexception.h
+    exceptions/illegalargumentexception.h \
+    view/aboutwindow.h
 
 FORMS    +=
 

@@ -36,9 +36,10 @@ void MainWindow::initComponents()
     // Init help menu
     QMenu *helpMenu = mMenu->addMenu(tr("Help"));
 
-    QAction *helpAction = helpMenu->addAction(tr("Help"), 0, 0, QKeySequence::HelpContents);
-    helpMenu->addSeparator();
+    //QAction *helpAction = helpMenu->addAction(tr("Help"), 0, 0, QKeySequence::HelpContents);
+    //helpMenu->addSeparator();
     QAction *aboutAction = helpMenu->addAction(tr("About GradeCalc..."));
+    connect(aboutAction, SIGNAL(triggered()), this, SLOT(on_aboutAction_triggered()));
 
     if (TRYOUT_MODE) {
         QAction *testAction = helpMenu->addAction(tr("Test it!"));
@@ -328,4 +329,10 @@ void MainWindow::on_newSheetAction_triggered()
 
     on_StudyCourseCombo_currentIndexChanged(mStudyCourseCombo->currentIndex());
     recalculateResult();
+}
+
+void MainWindow::on_aboutAction_triggered()
+{
+    AboutWindow a;
+    a.setVisible(true);
 }
