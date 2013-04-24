@@ -19,7 +19,6 @@ void MainWindow::initComponents()
     mMenu = new QMenuBar(this);
     QMenu *fileMenu = mMenu->addMenu(tr("&File"));
 
-    // todo: Implement newSheetAction
     QAction *newSheetAction = fileMenu->addAction(tr("&New worksheet"));
     connect(newSheetAction, SIGNAL(triggered()), this, SLOT(on_newSheetAction_triggered()));
 
