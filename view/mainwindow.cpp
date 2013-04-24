@@ -2,6 +2,7 @@
 
 QStringList MainWindow::TABLE_HEADERS_H;
 const Qt::ItemFlag MainWindow::DISABLE_EDIT_FLAG = Qt::ItemFlag(~Qt::ItemIsEditable);
+const char *MainWindow::FILEDIALOG_FILTER = "GradeCalc Worksheet (*.gcw)";
 
 MainWindow::MainWindow() :
     QWidget(),
@@ -20,7 +21,7 @@ void MainWindow::initComponents()
 
     // todo: Implement newSheetAction
     QAction *newSheetAction = fileMenu->addAction(tr("&New worksheet"));
-    //connect(newSheetAction, SIGNAL(triggered()), this, SLOT(on_newSheetAction_click()));
+    connect(newSheetAction, SIGNAL(triggered()), this, SLOT(on_newSheetAction_triggered()));
 
     QAction *loadSheetAction = fileMenu->addAction(tr("&Load worksheet"));
     connect(loadSheetAction, SIGNAL(triggered()), this, SLOT(on_loadSheetAction_triggered()));
@@ -181,10 +182,14 @@ void MainWindow::recalculateResult() {
         sumValue += c->getValue();
     }
 
-    qDebug() << Q_FUNC_INFO << sumValue << sumEcts;
-    resultGrade = sumValue / sumEcts;
-    mResultEctsLabel->setText(QString("<b>%1</b>").arg(sumValue));
-    mResultGradeLabel->setText(QString("<b>%1</b>").arg(resultGrade));
+    if (sumValue < 1.0 || sumEcts < 1.0) {
+        mResultEctsLabel->setText("<b>N/A</b>");
+        mResultGradeLabel->setText("<b>N/A</b>");
+    } else {
+        resultGrade = (sumValue < 1.0 || sumEcts < 1.0) ? 0.0 : sumValue / sumEcts;
+        mResultEctsLabel->setText(QString("<b>%1</b>").arg(sumValue));
+        mResultGradeLabel->setText(QString("<b>%1</b>").arg(resultGrade));
+    }
 }
 
 void MainWindow::on_StudyCourseCombo_currentIndexChanged(int index) {
@@ -246,7 +251,7 @@ void MainWindow::on_saveSheetAction_triggered()
                                          tr("Select file "
                                             "to save data to"),
                                          QString(),
-                                         tr("GradeCalc Worksheet (*.gcw)"));
+                                         tr(FILEDIALOG_FILTER));
 
     if (filename.isEmpty())
         return;
@@ -259,12 +264,11 @@ void MainWindow::on_saveSheetAction_triggered()
 
 void MainWindow::on_loadSheetAction_triggered()
 {
-    // todo: Refactor FileDialog filter to const static member
     QString filename =
             QFileDialog::getOpenFileName(this,
                                          tr("Select file to load data from"),
                                          QString(),
-                                         tr("GradeCalc Worksheet (*.gcw)"));
+                                         tr(FILEDIALOG_FILTER));
 
     if (filename.isEmpty())
         return;
@@ -312,5 +316,15 @@ void MainWindow::on_loadSheetAction_triggered()
 
     // Trigger UI changes
     on_StudyCourseCombo_currentIndexChanged(w.studyCourseId());
+    recalculateResult();
+}
+
+void MainWindow::on_newSheetAction_triggered()
+{
+    QList<Course *> courses = mCurrentStudyCourse->getCourses();
+    foreach (Course *c, courses)
+        c->clear();
+
+    on_StudyCourseCombo_currentIndexChanged(mStudyCourseCombo->currentIndex());
     recalculateResult();
 }

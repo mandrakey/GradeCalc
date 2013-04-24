@@ -82,6 +82,12 @@ void Course::setGrade(double grade) throw (QString)
     mValue = mGrade * mEcts;
 }
 
+void Course::clear()
+{
+    mGrade = 0;
+    mValue = 0;
+}
+
 QString Course::toString() const
 {
     QString res = QString("\t\t> Course %1 (%2)\n").

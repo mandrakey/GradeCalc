@@ -24,6 +24,7 @@ public:
     double getValue() const;
 
     void setGrade(double grade) throw (QString);
+    void clear();
 
     QString toString() const;
 

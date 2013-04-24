@@ -60,12 +60,15 @@ private slots:
 
     void on_loadSheetAction_triggered();
 
+    void on_newSheetAction_triggered();
+
 private:
     void initComponents();
     void clearCourseTable();
 
     static QStringList TABLE_HEADERS_H;
     static const Qt::ItemFlag DISABLE_EDIT_FLAG;
+    static const char *FILEDIALOG_FILTER;
 
     QMenuBar *mMenu;
 
