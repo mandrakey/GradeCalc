@@ -52,6 +52,7 @@ FORMS    +=
 
 OTHER_FILES += \
     data.xml \
-    en_US.ts
+    en_US.ts \
+    README.md
 
 TRANSLATIONS = en_US.ts
