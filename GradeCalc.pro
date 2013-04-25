@@ -22,7 +22,6 @@ SOURCES += main.cpp\
     model/course.cpp \
     exceptions/illegalxmlexception.cpp \
     exceptions/exception.cpp \
-    programoptions.cpp \
     exceptions/uninitializedexception.cc \
     #model/gradetablemodel.cpp \
     exceptions/nullpointerexception.cpp \
@@ -30,7 +29,8 @@ SOURCES += main.cpp\
     model/application.cpp \
     model/worksheet.cpp \
     exceptions/illegalargumentexception.cpp \
-    view/aboutwindow.cpp
+    view/aboutwindow.cpp \
+    qprogramoptions.cpp
 
 HEADERS  += \
     model/studycourse.h \
@@ -38,7 +38,6 @@ HEADERS  += \
     model/course.h \
     exceptions/illegalxmlexception.h \
     exceptions/exception.h \
-    programoptions.h \
     exceptions/uninitializedexception.h \
     #model/gradetablemodel.h \
     exceptions/nullpointerexception.h \
@@ -46,7 +45,8 @@ HEADERS  += \
     model/application.h \
     model/worksheet.h \
     exceptions/illegalargumentexception.h \
-    view/aboutwindow.h
+    view/aboutwindow.h \
+    qprogramoptions.h
 
 FORMS    +=
 

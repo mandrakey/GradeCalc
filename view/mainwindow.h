@@ -1,5 +1,4 @@
-/*
- * Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+/* Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
  *
  * This file is part of GradeCalc.
  *
@@ -39,7 +38,6 @@
 using std::cerr;
 using std::endl;
 
-#include "programoptions.h"
 #include "model/application.h"
 #include "model/institution.h"
 #include "model/studycourse.h"

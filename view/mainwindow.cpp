@@ -1,5 +1,4 @@
-/*
- * Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+/* Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
  *
  * This file is part of GradeCalc.
  *
@@ -156,37 +155,7 @@ bool MainWindow::close()
 }
 
 void MainWindow::on_testAction_triggered() {
-    if (!TRYOUT_MODE)
-        return;
-
-    QMessageBox::StandardButton s = QMessageBox::question(this, "Testen", "Laden?",
-                                                          QMessageBox::Yes|QMessageBox::No);
-
-    try {
-        if (s == QMessageBox::Yes) {
-            Worksheet ws("/tmp/test.gcw");
-
-            qDebug() << "Institution:" << ws.institutionId();
-            qDebug() << "StudyCourse:" << ws.studyCourseId();
-            qDebug() << "Grades:";
-
-            QHash<int,double> grades = ws.grades();
-            foreach (int key, grades.keys()) {
-                qDebug() << "Course" << key << ":" << grades.value(key);
-            }
-        } else {
-            Worksheet ws;
-            ws.setInstitutionId(1);
-            ws.setStudyCourseId(5);
-            ws.setGrade(0, 2.3);
-            ws.setGrade(1, 1.7);
-            ws.toFile("/tmp/test.gcw");
-        }
-    } catch (IllegalArgumentException e) {
-        QMessageBox::warning(this, "Fehler", QString("Die gewünschte Aktion "
-                                                     "konnte nicht durchgeführt "
-                                                     "werden: %1").arg(e.getMessage()));
-    }
+    Q_UNIMPLEMENTED();
 }
 
 void MainWindow::recalculateResult() {

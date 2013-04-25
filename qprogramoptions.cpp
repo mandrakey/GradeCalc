@@ -1,34 +1,50 @@
-#include "programoptions.h"
+/* Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+ *
+ * QProgramOptions is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * QProgramOptions is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with QProgramOptions.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "qprogramoptions.h"
 
 //==============================================================================
-// Implementation of ProgramOptions
+// Implementation of QProgramOptions
 
 //----
 // Initialize static members
-QHash<QString, QVariant> ProgramOptions::mRecognized = QHash<QString, QVariant>();
-QStringList ProgramOptions::mPositionals = QStringList();
-QStringList ProgramOptions::mUnrecognized = QStringList();
+QHash<QString, QVariant> QProgramOptions::mRecognized = QHash<QString, QVariant>();
+QStringList QProgramOptions::mPositionals = QStringList();
+QStringList QProgramOptions::mUnrecognized = QStringList();
 
-QList<ProgramOptions::Option> ProgramOptions::mAddedOptions = QList<ProgramOptions::Option>();
+QList<QProgramOptions::Option> QProgramOptions::mAddedOptions = QList<QProgramOptions::Option>();
 
-po::options_description ProgramOptions::mRecognizedOptions;
-po::positional_options_description ProgramOptions::mPositionalOptions;
+po::options_description QProgramOptions::mRecognizedOptions;
+po::positional_options_description QProgramOptions::mPositionalOptions;
 
-ProgramOptions::ProgramOptions()
+QProgramOptions::QProgramOptions()
 {
 }
 
-ProgramOptions::const_iterator ProgramOptions::begin() const
+QProgramOptions::const_iterator QProgramOptions::begin() const
 {
-    return const_iterator(this, ProgramOptions::const_iterator::START);
+    return const_iterator(this, QProgramOptions::const_iterator::START);
 }
 
-ProgramOptions::const_iterator ProgramOptions::end() const
+QProgramOptions::const_iterator QProgramOptions::end() const
 {
-    return const_iterator(this, ProgramOptions::const_iterator::END);
+    return const_iterator(this, QProgramOptions::const_iterator::END);
 }
 
-void ProgramOptions::parse(int argc, char *argv[])
+void QProgramOptions::parse(int argc, char *argv[])
 {
     Q_ASSERT(argv);
 
@@ -80,12 +96,12 @@ void ProgramOptions::parse(int argc, char *argv[])
     }
 }
 
-bool ProgramOptions::contains(const Option &o) const
+bool QProgramOptions::contains(const Option &o) const
 {
     return mAddedOptions.contains(o);
 }
 
-bool ProgramOptions::contains(const QString &name) const
+bool QProgramOptions::contains(const QString &name) const
 {
     foreach (Option o, mAddedOptions) {
         if (o.name().compare(name) == 0) {
@@ -96,47 +112,47 @@ bool ProgramOptions::contains(const QString &name) const
     return false;
 }
 
-bool ProgramOptions::recognized(const Option &o) const
+bool QProgramOptions::recognized(const Option &o) const
 {
     return mRecognized.keys().contains(o.name());
 }
 
-bool ProgramOptions::recognized(const QString &name) const
+bool QProgramOptions::recognized(const QString &name) const
 {
     return mRecognized.keys().contains(name);
 }
 
-QVariant ProgramOptions::recognizedValue(const Option &o) const
+QVariant QProgramOptions::recognizedValue(const Option &o) const
 {
     return mRecognized.value(o.name());
 }
 
-QVariant ProgramOptions::recognizedValue(const QString &name) const
+QVariant QProgramOptions::recognizedValue(const QString &name) const
 {
     return mRecognized.value(name);
 }
 
-void ProgramOptions::printHelp() const
+void QProgramOptions::printHelp() const
 {
     std::cout << *this;
 }
 
-QHash<QString, QVariant>& ProgramOptions::recognized() const
+QHash<QString, QVariant>& QProgramOptions::recognized() const
 {
     return mRecognized;
 }
 
-QList<QString>& ProgramOptions::positionals() const
+QList<QString>& QProgramOptions::positionals() const
 {
     return mPositionals;
 }
 
-QList<QString>& ProgramOptions::unrecognized() const
+QList<QString>& QProgramOptions::unrecognized() const
 {
     return mUnrecognized;
 }
 
-ProgramOptions& ProgramOptions::operator<<(const Option& o)
+QProgramOptions& QProgramOptions::operator<<(const Option& o)
 {
     addOption(o.type(),
               o.name().toStdString().c_str(),
@@ -149,7 +165,7 @@ ProgramOptions& ProgramOptions::operator<<(const Option& o)
     return *this;
 }
 
-void ProgramOptions::addOption(QVariant::Type type, const char *name,
+void QProgramOptions::addOption(QVariant::Type type, const char *name,
                                const char *alias, const char *description,
                                const QVariant &defaultValue,
                                bool positional, int maxCount)
@@ -247,7 +263,7 @@ void ProgramOptions::addOption(QVariant::Type type, const char *name,
     addPositional(name, positional, maxCount);
 }
 
-void ProgramOptions::addPositional(const char *name,
+void QProgramOptions::addPositional(const char *name,
                                    bool positional, int maxCount)
 {
     if (positional) {
@@ -258,7 +274,7 @@ void ProgramOptions::addPositional(const char *name,
     }
 }
 
-std::ostream& operator<<(std::ostream& lhs, const ProgramOptions& rhs)
+std::ostream& operator<<(std::ostream& lhs, const QProgramOptions& rhs)
 {
     rhs.mRecognizedOptions.print(lhs);
     return lhs;
@@ -267,7 +283,7 @@ std::ostream& operator<<(std::ostream& lhs, const ProgramOptions& rhs)
 //==============================================================================
 // Implementation of Option
 
-ProgramOptions::Option::Option(const QString &name, const QString &alias,
+QProgramOptions::Option::Option(const QString &name, const QString &alias,
                                const QString &description,
                                const QVariant &defaultValue,
                                bool positional, int maxCount) :
@@ -277,7 +293,7 @@ ProgramOptions::Option::Option(const QString &name, const QString &alias,
 {
 }
 
-ProgramOptions::Option::Option(const QVariant::Type type, const QString &name,
+QProgramOptions::Option::Option(const QVariant::Type type, const QString &name,
                                const QString &alias, const QString &description,
                                const QVariant &defaultValue,
                                bool positional, int maxCount) :
@@ -286,7 +302,7 @@ ProgramOptions::Option::Option(const QVariant::Type type, const QString &name,
 {
 }
 
-bool ProgramOptions::Option::operator==(const Option& other) const
+bool QProgramOptions::Option::operator==(const Option& other) const
 {
     if (this->mDefaultValue != other.mDefaultValue
             || this->mDescription.compare(other.mDescription) != 0
@@ -301,51 +317,51 @@ bool ProgramOptions::Option::operator==(const Option& other) const
     return true;
 }
 
-QVariant::Type ProgramOptions::Option::type() const
+QVariant::Type QProgramOptions::Option::type() const
 {
     return mType;
 }
 
-QString ProgramOptions::Option::name() const
+QString QProgramOptions::Option::name() const
 {
     return mName;
 }
 
-QString ProgramOptions::Option::alias() const
+QString QProgramOptions::Option::alias() const
 {
     return mAlias;
 }
 
-QString ProgramOptions::Option::description() const
+QString QProgramOptions::Option::description() const
 {
     return mDescription;
 }
 
-QVariant ProgramOptions::Option::defaultValue() const
+QVariant QProgramOptions::Option::defaultValue() const
 {
     return mDefaultValue;
 }
 
-bool ProgramOptions::Option::positional() const
+bool QProgramOptions::Option::positional() const
 {
     return mPositional;
 }
 
-int ProgramOptions::Option::maxCount() const
+int QProgramOptions::Option::maxCount() const
 {
     return mMaxCount;
 }
 
-std::ostream& operator<<(std::ostream& out, const ProgramOptions::Option& o)
+std::ostream& operator<<(std::ostream& out, const QProgramOptions::Option& o)
 {
     out << o.mName.toStdString();
     return out;
 }
 
 //==============================================================================
-// Implementation of ProgramOptions::const_iterator
+// Implementation of QProgramOptions::const_iterator
 
-ProgramOptions::const_iterator::const_iterator(const ProgramOptions *_v,
+QProgramOptions::const_iterator::const_iterator(const QProgramOptions *_v,
                                                etype t) :
     mIndex(0), mKeys(QList<QString>()), mObject(0)
 {
@@ -356,17 +372,17 @@ ProgramOptions::const_iterator::const_iterator(const ProgramOptions *_v,
     mIndex = (t == START) ? 0 : mKeys.size() - 1;
 }
 
-const QVariant ProgramOptions::const_iterator::operator *()
+const QVariant QProgramOptions::const_iterator::operator *()
 {
     return mObject->recognized().value(mKeys.at(mIndex));
 }
 
-bool ProgramOptions::const_iterator::operator !=(const const_iterator& it) const
+bool QProgramOptions::const_iterator::operator !=(const const_iterator& it) const
 {
     return (mKeys.at(mIndex).compare(it.mKeys.at(it.mIndex)));
 }
 
-ProgramOptions::const_iterator& ProgramOptions::const_iterator::operator ++()
+QProgramOptions::const_iterator& QProgramOptions::const_iterator::operator ++()
 {
     ++mIndex;
     return *this;

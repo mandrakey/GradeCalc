@@ -1,5 +1,4 @@
-/*
- * Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+/* Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
  *
  * This file is part of GradeCalc.
  *

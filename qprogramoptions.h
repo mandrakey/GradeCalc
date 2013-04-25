@@ -1,5 +1,32 @@
-#ifndef PROGRAMOPTIONS_H
-#define PROGRAMOPTIONS_H
+/* Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+ *
+ * QProgramOptions is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * QProgramOptions is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with QProgramOptions.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * The QProgramOptions wrapper library for boost program_options.
+ * This contains the QProgramOptions library, a wrapper for boost
+ * program_options with a more Qt-like interface.
+ * To use this library, you need the boost program_options library!
+ *
+ * @author Maurice Bleuel <mandrakey@lavabit.com>
+ * @version 1.0
+ * @see http://www.boost.org/doc/libs/1_53_0/doc/html/program_options.html
+ */
+
+#ifndef QPROGRAMOPTIONS_H
+#define QPROGRAMOPTIONS_H
 
 #include <QList>
 #include <QStringList>
@@ -24,9 +51,9 @@ using std::string;
  * @author Maurice Bleuel <mbleuel@bleuelmedia.com>
  * @ingroup lib
  */
-class ProgramOptions
+class QProgramOptions
 {
-    friend std::ostream& operator<<(std::ostream&, const ProgramOptions&);
+    friend std::ostream& operator<<(std::ostream&, const QProgramOptions&);
 public:
     
     /**
@@ -37,11 +64,11 @@ public:
     public:
         enum etype { START, END };
 
-        /** Construct a new const_iterator for a given ProgramOptions instance.
-         * @param _v Pointer to ProgramOptions instance to use
+        /** Construct a new const_iterator for a given QProgramOptions instance.
+         * @param _v Pointer to QProgramOptions instance to use
          * @param t Type of enumerator (beginning at first or last element)
          */
-        const_iterator(const ProgramOptions *_v, etype t);
+        const_iterator(const QProgramOptions *_v, etype t);
         
         /**
          * Return the value currently pointed at in recognized list.
@@ -67,8 +94,8 @@ public:
         /** List of keys to iterate through. */
         QList<QString> mKeys;
         
-        /** Points to attached ProgramOptions object. */
-        const ProgramOptions *mObject;
+        /** Points to attached QProgramOptions object. */
+        const QProgramOptions *mObject;
     };
 
     /**
@@ -168,9 +195,9 @@ public:
     };
 
     /**
-     * Construct a ProgramOptions instance with access to monostate data.
+     * Construct a QProgramOptions instance with access to monostate data.
      */
-    ProgramOptions();
+    QProgramOptions();
 
     // Iterator interface
     /**
@@ -192,7 +219,7 @@ public:
      */
     void parse(int argc, char* argv[]);
 
-    /** Check wether Option o was added to the recognizable ProgramOptions.
+    /** Check wether Option o was added to the recognizable QProgramOptions.
      * @param o Reference to option to check for
      * @return Wether or not the option has been added
      */
@@ -233,7 +260,7 @@ public:
     QList<QString>& unrecognized() const;
 
     // Option handling
-    ProgramOptions& operator<<(const Option& o);
+    QProgramOptions& operator<<(const Option& o);
 
 private:
     /**
@@ -279,11 +306,11 @@ private:
 };
 
 /**
- * Prints the help message for the current ProgramOptions data.
+ * Prints the help message for the current QProgramOptions data.
  * @param lhs Output stream reference to use
- * @param rhs ProgramOptions instance to print help for
+ * @param rhs QProgramOptions instance to print help for
  * @return Output stream reference for chaining
  */
-std::ostream& operator<<(std::ostream& lhs, const ProgramOptions& rhs);
+std::ostream& operator<<(std::ostream& lhs, const QProgramOptions& rhs);
 
-#endif // PROGRAMOPTIONS_H
+#endif // QPROGRAMOPTIONS_H

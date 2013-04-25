@@ -1,5 +1,4 @@
-/*
- * Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+/* Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
  *
  * This file is part of GradeCalc.
  *
@@ -35,7 +34,7 @@
 #include <iostream>
 
 #include "view/mainwindow.h"
-#include "programoptions.h"
+#include "qprogramoptions.h"
 #include "model/course.h"
 #include "model/studycourse.h"
 #include "model/institution.h"
@@ -45,17 +44,15 @@ using std::cerr;
 using std::endl;
 using std::string;
 
-namespace po = boost::program_options;
-
 const bool TRYOUT_MODE = false;
 
 void initProgramOptions()
 {
-    ProgramOptions po;
+    QProgramOptions po;
 
     // Create Options
-    ProgramOptions::Option helpOption("help", "?", "display this help");
-    ProgramOptions::Option worksheetOption(QVariant::String, "worksheet", "w",
+    QProgramOptions::Option helpOption("help", "?", "display this help");
+    QProgramOptions::Option worksheetOption(QVariant::String, "worksheet", "w",
                                            "worksheet to load on startup",
                                            QVariant(), true, 1);
 
@@ -65,7 +62,7 @@ void initProgramOptions()
 int main(int argc, char *argv[])
 {
     initProgramOptions();
-    ProgramOptions po;
+    QProgramOptions po;
     po.parse(argc, argv);
 
     if (po.recognized("help")) {
