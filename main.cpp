@@ -22,7 +22,7 @@ using std::string;
 
 namespace po = boost::program_options;
 
-const bool TRYOUT_MODE = true;
+const bool TRYOUT_MODE = false;
 
 void initProgramOptions()
 {
