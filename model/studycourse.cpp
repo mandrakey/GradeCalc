@@ -1,5 +1,25 @@
+/*
+ * Copyright (C) 2013  Maurice Bleuel (mandrakey@lavabit.com)
+ *
+ * This file is part of GradeCalc.
+ *
+ * GradeCalc is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GradeCalc is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GradeCalc.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "studycourse.h"
 #include <iostream>
+
 StudyCourse::StudyCourse() :
     mId(-1), mName(QString()), mTitle(QString()), mCourses(QList<Course*>())
 {
@@ -23,7 +43,7 @@ StudyCourse::StudyCourse(const QDomNode &node) throw (IllegalXmlException) :
 
     QDomNodeList courses = element.elementsByTagName("Course");
     for (int i = 0; i < courses.size(); ++i)
-        this->mCourses.push_back(new Course(courses.at(i)));
+        this->mCourses << new Course(courses.at(i));
 
     //std::cout << QString("StudyCourse[%1, %2]").arg(mName, mTitle).toStdString() << std::endl;
 }
@@ -72,7 +92,7 @@ Course* StudyCourse::getCourse(int index) const throw (QString)
 
 void StudyCourse::addCourse(Course *c)
 {
-    mCourses.push_back(c);
+    mCourses << c;
 }
 
 QString StudyCourse::toString() const

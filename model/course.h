@@ -61,6 +61,14 @@ public:
     double getValue() const;
 
     /**
+     * Set grade and retrieve score value using the new grade.
+     * @param grade Grade to set, must be in between 1.0 and 5.0
+     * @return Score value calculated after setting grade
+     * @throw QString
+     */
+    double getValue(double grade) throw (QString);
+
+    /**
      * Set a grade for this course.
      * Calculates the aquired core value using mEcts.
      * @param grade The grade to set, must be in between 1.0 and 5.0.

@@ -94,7 +94,7 @@ void Application::loadDatabase()
     QDomNodeList l = root.elementsByTagName("Institution");
 
     for (int i = 0; i < l.size(); ++i) {
-        INSTITUTIONS.push_back(new Institution(l.at(i)));
+        INSTITUTIONS << new Institution(l.at(i));
     }
 }
 

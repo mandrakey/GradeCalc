@@ -61,7 +61,7 @@ void ProgramOptions::parse(int argc, char *argv[])
         } else if (type == typeid(std::vector<std::string>)) {
             QList<QVariant> l;
             foreach (std::string value, v.as<std::vector<std::string> >()) {
-                l.push_back(QVariant(value.c_str()));
+                l << QVariant(value.c_str());
             }
             mRecognized.insert(name, QVariant(l));
         }
@@ -72,7 +72,7 @@ void ProgramOptions::parse(int argc, char *argv[])
                                                 po::exclude_positional);
     mUnrecognized.clear();
     foreach (string s, u) {
-        mUnrecognized.push_back(QString(s.c_str()));
+        mUnrecognized << QString(s.c_str());
     }
 
     } catch (po::error& e) {
@@ -145,7 +145,7 @@ ProgramOptions& ProgramOptions::operator<<(const Option& o)
               o.defaultValue(),
               o.positional(), o.maxCount());
 
-    mAddedOptions.push_back(o);
+    mAddedOptions << o;
     return *this;
 }
 

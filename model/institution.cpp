@@ -45,7 +45,7 @@ Institution::Institution(const QDomNode &node) throw (IllegalXmlException) :
         else if (e.tagName().compare("description") == 0)
             this->mDescription = e.text();
         else if (e.tagName().compare("StudyCourse") == 0)
-            this->mStudyCourses.push_back(new StudyCourse(children.at(i)));
+            this->mStudyCourses << new StudyCourse(children.at(i));
     }
 
     // Check validity
