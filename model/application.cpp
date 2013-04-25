@@ -1,14 +1,34 @@
 #include "application.h"
 
+bool Application::INITIALIZED = false;
 QList<Institution*> Application::INSTITUTIONS;
 
 const char *Application::APPNAME = "GradeCalc";
 const char *Application::VERSION = "1.0";
 const char *Application::COPYRIGHT = "Copyright (C) 2013 Maurice Bleuel";
-const char *Application::LICENSE = "GPL or so...";
+QString Application::LICENSE = QString();
 
 Application::Application()
 {
+    if (INITIALIZED)
+        return;
+    INITIALIZED = true;
+
+    QFile licenseFile("./COPYING");
+    if (!licenseFile.exists()) {
+        cerr << "Warning: License file is not present.";
+        LICENSE = "License file is not present. Illegal use.";
+        return;
+    }
+
+    if (!licenseFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        cerr << "Warning: License file could not be opened.";
+        LICENSE = "License file coult not be opened.";
+        return;
+    }
+
+    QTextStream in(&licenseFile);
+    LICENSE = in.readAll();
 }
 
 QList<Institution *> Application::institutions() const
@@ -18,20 +38,20 @@ QList<Institution *> Application::institutions() const
 
 const QString Application::appName() const
 {
-    return APPNAME;
+    return QString(APPNAME);
 }
 
 const QString Application::version() const
 {
-    return VERSION;
+    return QString(VERSION);
 }
 
 const QString Application::copyright() const {
-    return COPYRIGHT;
+    return QString(COPYRIGHT);
 }
 
 const QString Application::license() const {
-    return LICENSE;
+    return QString(LICENSE);
 }
 
 void Application::loadDatabase()

@@ -1,7 +1,8 @@
 #include "aboutwindow.h"
 
 AboutWindow::AboutWindow() :
-    mMainLayout(0), mApplicationName(0), mCopyrightNotice(0), mLicense(0)
+    mMainLayout(0), mApplicationName(0), mCopyrightNotice(0), mLicense(0),
+    mButtonBox(0)
 {
     initComponents();
 }
@@ -9,18 +10,25 @@ AboutWindow::AboutWindow() :
 void AboutWindow::initComponents()
 {
     mMainLayout = new QVBoxLayout(this);
-    mMainLayout->setContentsMargins(10, 30, 10, 10);
+    //mMainLayout->setContentsMargins(10, 10, 10, 10);
 
     Application app;
-    mApplicationName = new QLabel(QString("%1 %2").arg(app.appName()).arg(app.version()));
-    mCopyrightNotice = new QLabel(app.copyright());
-    mLicense = new QTextEdit(app.license());
+    mApplicationName = new QLabel(QString("<h1>%1 v.%2</h1>").arg(app.appName()).arg(app.version()));
+    mCopyrightNotice = new QLabel(QString("<i>%1</i>").arg(app.copyright()));
 
+    mLicense = new QTextEdit();
     mLicense->setMinimumHeight(200);
+    mLicense->setMinimumWidth(300);
+    mLicense->setReadOnly(true);
+    mLicense->setText(app.license());
+
+    mButtonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+    connect(mButtonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(close()));
 
     mMainLayout->addWidget(mApplicationName);
     mMainLayout->addWidget(mCopyrightNotice);
     mMainLayout->addWidget(mLicense);
+    mMainLayout->addWidget(mButtonBox);
 
     this->setLayout(mMainLayout);
 

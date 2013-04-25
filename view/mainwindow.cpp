@@ -8,7 +8,7 @@ MainWindow::MainWindow() :
     QWidget(),
     mMenu(0), mMainLayout(0), mTopLayout(0),
     mInstitutionsCombo(0), mStudyCourseCombo(0), mCourseTable(0),
-    mCurrentInstitution(0), mCurrentStudyCourse(0)
+    mCurrentInstitution(0), mCurrentStudyCourse(0), mAboutWindow(0)
 {
     initComponents();
 }
@@ -333,6 +333,6 @@ void MainWindow::on_newSheetAction_triggered()
 
 void MainWindow::on_aboutAction_triggered()
 {
-    AboutWindow a;
-    a.setVisible(true);
+    mAboutWindow = new AboutWindow();
+    mAboutWindow->show();
 }

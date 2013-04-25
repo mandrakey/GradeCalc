@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <QFile>
+#include <QTextStream>
 
 #include <iostream>
 using std::cerr;
@@ -25,12 +26,13 @@ public:
     void cleanup();
 
 private:
+    static bool INITIALIZED;
     static QList<Institution *> INSTITUTIONS;
 
     static const char *APPNAME;
     static const char *VERSION;
     static const char *COPYRIGHT;
-    static const char *LICENSE;
+    static QString LICENSE;
 };
 
 #endif // APPLICATION_H

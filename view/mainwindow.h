@@ -88,6 +88,8 @@ private:
 
     Institution *mCurrentInstitution;
     StudyCourse *mCurrentStudyCourse;
+
+    AboutWindow *mAboutWindow;
 };
 
 #endif // MAINWINDOW_H
