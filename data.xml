@@ -12,8 +12,101 @@
             <Course shortname="MAT" ects="7.5" semester="1">
                 Mathematische Grundlagen
             </Course>
-            <Course shortname="MMP" ects="12" semester="5">
+            <Course shortname="GES" ects="5" semester="1">
+                Grundlagen der Gestaltung
+            </Course>
+            <Course shortname="TI" ects="5" semester="1">
+                Technische Grundlagen der Informatik
+            </Course>
+            <Course shortname="LPT" ects="2.5" semester="1">
+                Lern- und Präsentationstechniken
+            </Course>
+            
+            <Course shortname="ALDS" ects="7.5" semester="2">
+                Algorithmen und Datenstrukturen
+            </Course>
+            <Course shortname="AWS" ects="8" semester="2">
+                Analysis, Wahrscheinlichkeitsrechnung und Statistik
+            </Course>
+            <Course shortname="PROG1" ects="7.5" semester="2">
+                Programmiertechniken I
+            </Course>
+            <Course shortname="MEDKOM" ects="2.5" semester="2">
+                Medienkommunikation
+            </Course>
+            <Course shortname="DSP-MI" ects="2.5" semester="2">
+                Diskrete Signalverarbeitung
+            </Course>
+            <Course shortname="Recht" ects="2" semester="2">
+                IT-Recht
+            </Course>
+            
+            <Course shortname="LAG" ects="5" semester="3">
+                Lineare Algebra und Geometrie
+            </Course>
+            <Course shortname="DBS" ects="5" semester="3">
+                Datenbanken
+            </Course>
+            <Course shortname="MEDGES" ects="5" semester="3">
+                Mediengestaltung
+            </Course>
+            <Course shortname="KOM" ects="5" semester="3">
+                Kommunikationsnetze
+            </Course>
+            <Course shortname="BWL" ects="5" semester="3">
+                Betriebswirtschaftslehre
+            </Course>
+            <Course shortname="PROG2" ects="5" semester="3">
+                Programmiertechniken II
+            </Course>
+            
+            <Course shortname="CG-MI" ects="5" semester="4">
+                Computergrafik
+            </Course>
+            <Course shortname="IPROG" ects="5" semester="4">
+                Internetprogrammierung
+            </Course>
+            <Course shortname="HCI" ects="5" semester="4">
+                Human Computer Interaction
+            </Course>
+            <Course shortname="SA" ects="5" semester="4">
+                Systemanalyse
+            </Course>
+            <Course shortname="PM" ects="5" semester="4">
+                Projektmanagement
+            </Course>
+            
+            <Course shortname="EIS" ects="5" semester="5">
+                Entwicklung interaktiver Systeme
+            </Course>
+            <Course shortname="SWE-MI" ects="5" semester="5">
+                Software Engineering
+            </Course>
+            <Course shortname="MMPR" ects="12" semester="5">
                 Multimediaprojekt
+            </Course>
+            
+            <Course shortname="FUEKOM" ects="2" semester="6">
+                Führungs- und Kommunikationstechniken
+            </Course>
+            <Course shortname="PRAX-MI" ects="12" semester="6">
+                Betreutes Praxisprojekt
+            </Course>
+            <Course shortname="BAC-MI" ects="12" semester="6">
+                Bachelor-Abschlussarbeit
+            </Course>
+            <Course shortname="ME" ects="2" semester="6">
+                Media Engineering
+            </Course>
+            
+            <Course shortname="VTF-1" ects="5" semester="4">
+                Vertiefungsfach 1
+            </Course>
+            <Course shortname="VTF-2" ects="5" semester="4">
+                Vertiefungsfach 2
+            </Course>
+            <Course shortname="VTF-3" ects="5" semester="5">
+                Vertiefungsfach 3
             </Course>
         </StudyCourse>
         
