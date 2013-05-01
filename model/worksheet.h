@@ -23,8 +23,6 @@
 #include <QFile>
 #include <QDataStream>
 
-#include <QDebug>
-
 #include "exceptions/illegalargumentexception.h"
 #include "model/studycourse.h"
 #include "model/course.h"

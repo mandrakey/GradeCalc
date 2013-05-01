@@ -96,7 +96,4 @@ void Worksheet::toFile(const QString &targetFile) const
     }
 
     f.close();
-
-    qDebug() << mInstitutionId << "," << mStudyCourseId;
-    qDebug() << mGrades;
 }

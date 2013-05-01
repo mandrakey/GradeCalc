@@ -219,10 +219,13 @@ void MainWindow::on_mGradeTable_cellChanged(int row, int column)
 {
     mCourseTable->blockSignals(true);
     Course *c = mCurrentStudyCourse->getCourses().at(row);
-    double newGrade = mCourseTable->item(row, column)->text().toDouble();
 
+    QString cellText = mCourseTable->item(row, column)->text();
     try {
-        c->setGrade(newGrade);
+        if (cellText.compare("0") == 0 || cellText.compare("") == 0)
+            c->clear();
+        else
+            c->setGrade(cellText.toDouble());
     } catch (QString e) {
         QMessageBox::warning(this, "Ungültige Eingabe", e);
         mCourseTable->item(row, column)->setText(QString("%1").arg(c->getGrade()));
